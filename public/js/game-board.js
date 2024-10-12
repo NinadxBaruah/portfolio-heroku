@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
       showModal(symbol);
     });
 
-    console.log(`${symbol} wins`);
+    // console.log(`${symbol} wins`);
   }
 
   //checkTie logic
@@ -252,7 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
         JSON.stringify({ type: "join", roomId: window.roomDetails.roomId })
       );
     }
-    console.log("socket connected");
+    // console.log("socket connected");
     // Clear previous QR code if any
     document.getElementById("qrcode").innerHTML = "";
     const inputText = document.getElementById("game-link");
@@ -327,7 +327,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Handle WebSocket closure and notify of disconnection
   ws.onclose = (event) => {
     if (ws.readyState == WebSocket.CLOSING) {
-      console.log("closing");
+      // console.log("closing");
     }
   };
 
@@ -373,7 +373,7 @@ setCloseWebSocketCallback(function() {
 
 
   // Output room details to the console for debugging
-  console.log(window.roomDetails);
+  // console.log(window.roomDetails);
 
   // Resetting Game Logic
 

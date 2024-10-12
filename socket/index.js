@@ -28,7 +28,7 @@ module.exports = function configure(server) {
   });
 
   wss.on("connection", (ws, req) => {
-    console.log("client connected");
+    // console.log("client connected");
     ws.on("error", onSocketPostError);
     const urlParts = req.url.split("/");
     const roomId = urlParts[3];
@@ -72,7 +72,7 @@ module.exports = function configure(server) {
             console.log("error from closing from message")
           }
         }
-        console.log(parsedMessage);
+        // console.log(parsedMessage);
         const clientToSend = getGameRoom(roomId);
         if (clientToSend && clientToSend.clientOne && clientToSend.clientTwo) {
           if (clientToSend.clientOne == ws) {
@@ -110,7 +110,7 @@ module.exports = function configure(server) {
             deleteRoom(roomId);
           }
         }
-        console.log(getGameRoom(roomId));
+        // console.log(getGameRoom(roomId));
       });
     }
   });

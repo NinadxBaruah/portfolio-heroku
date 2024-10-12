@@ -78,7 +78,7 @@ createButton.addEventListener("click", async() => {
       }else{
         alert(`Failed to create game. (Message: ${data.message}`)
       }
-      console.log(data)
+      // console.log(data)
     } catch (error) {
       console.log(error);
     }

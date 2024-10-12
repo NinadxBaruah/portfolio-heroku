@@ -1,7 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
-body {
-    font-family:  cursive;
+html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: "Roboto", sans-serif;
+    font-style: italic;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,65 +12,96 @@ body {
     margin: 0;
     background-color: #f9f9f9; /* Light background */
     color: #222; /* Dark text color for contrast */
-}
-
-.container {
-    background-color: #fff; /* Light container background */
+  }
+  
+  .container {
+    background-color: #fff;
     padding: 40px;
-    border-radius: 24px; /* Increased border-radius for softer edges */
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15); /* Softer shadow */
     text-align: center;
-    width: 90%; /* Use a larger percentage for more width */
-    max-width: 800px; /* Increased maximum width for even more space */
+    width: 90%;
+    max-width: 800px;
     border: 2px solid #00bfff; /* Bright blue border */
     position: relative;
-}
-
-h1 {
+  }
+  
+  h1 {
     color: #ff00ff; /* Bright title color */
     margin-bottom: 5px;
     font-size: 2.5rem;
-}
-
-h2 {
+  }
+  
+  h2 {
     color: #00bfff; /* Bright blue subtitle color */
     margin-bottom: 15px;
     font-size: 1.75rem;
-}
-
-h3 {
+  }
+  
+  h3 {
     color: #00ff00; /* Bright green for headings */
     margin: 20px 0 10px;
     font-size: 1.5rem;
-}
-
-.option-container {
+  }
+  
+  .option-container {
     display: flex;
     flex-direction: column;
     gap: 20px;
     text-align: left;
-}
-
-.project {
-    background-color: #e8f4fd; /* Light blue background for projects */
+  }
+  
+  .project {
+    background-color: #e8f4fd;
     padding: 15px;
-    border-radius: 12px; /* Softer edges for project cards */
-    border: 2px solid #00bfff; /* Solid border for projects */
-    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth scale effect */
+    border-radius: 12px;
+    border: 2px solid #00bfff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
-}
-
-.project:hover {
-    transform: scale(1.03); /* Slightly enlarge on hover */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
-}
-
-ul {
+  }
+  
+  .project:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  ul {
     list-style-type: none;
     padding: 0;
-}
-
-li {
+  }
+  
+  li {
     padding: 5px 0;
-    color: #333; /* Darker text color for list items */
-}
+    color: #333;
+  }
+  
+  /* Style for the "Contact Me" button */
+  .contact-me {
+    position: fixed; /* Fixed position for better visibility */
+    bottom: 20px; /* Positioned near the bottom */
+    right: 20px;
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    padding: 12px 25px;
+    text-align: center;
+    border-radius: 50px; /* Rounded button for a modern look */
+    font-size: 18px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  .contact-me:hover {
+    background-color: #45a049; /* Darker green on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+  }
+  
+  .contact-me a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .contact-me a:hover {
+    text-decoration: underline;
+  }
+  

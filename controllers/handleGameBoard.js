@@ -15,7 +15,7 @@ const handleGameBoard = (req, res) => {
       }
       if(symbol){
         roomDetails.symbol = symbol;
-        console.log("here")
+        // console.log("here")
       }
       // console.log("here sym:",symbol)
       setGameRoom(roomId, roomDetails);

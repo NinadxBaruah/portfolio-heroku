@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
       showModal(symbol);
     });
 
-    console.log(`${symbol} wins`);
+    // console.log(`${symbol} wins`);
   }
 
   //checkTie logic
@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ); // Notify server you joined
       runClock(); // Start the clock
     }
-    console.log("socket connected");
+    // console.log("socket connected");
     const isWsConnectionAlive = setInterval(() =>{
       if(ws.readyState == WebSocket.CLOSING || ws.readyState == WebSocket.CLOSED){
         connectionStatus.style.display = "block";
@@ -287,7 +287,7 @@ setCloseWebSocketCallback(function() {
     const clickedCell = event.target;
     const clickedCellIndex = clickedCell.getAttribute("data-index");
 
-    console.log(clickedCellIndex);
+    // console.log(clickedCellIndex);
 
     if (board[clickedCellIndex] == "" && currentMover == "You") {
       cells[
@@ -311,7 +311,7 @@ setCloseWebSocketCallback(function() {
     }
   }
 
-  console.log(window.roomDetails); // Log room details for debugging purposes
+  // console.log(window.roomDetails); // Log room details for debugging purposes
 
   // Resetting Game Logic
 
