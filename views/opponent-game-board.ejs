@@ -4,6 +4,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Open Graph meta tags -->
+  <meta property="og:title" content="Tic-Tac-Toe: Offline & Multiplayer" />
+  <meta property="og:description" content="Play Tic-Tac-Toe offline or challenge your friends in multiplayer mode! Simple, fun, and engaging." />
+  <meta property="og:url" content="https://www.ninadbaurah.me/projects/tic-tac-toe" />
+  <meta property="og:image" content="/image/tic-tac-toe-preview.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Tic-Tac-Toe Game" />
   <link rel="stylesheet" href="/css/opponent-game-board.css" />
   <title>Document</title>
 </head>
@@ -18,7 +25,9 @@
   </div>
 
   <div class="game-container">
-    <a href="/" style="text-decoration: none; cursor: pointer;"><h1 id="logo">Tic-Tac-Toe</h1></a>
+    <a href="/projects/tic-tac-toe" style="text-decoration: none; cursor: pointer;">
+      <h1 id="logo">Tic-Tac-Toe</h1>
+    </a>
     <div class="players-info">
       <div class="player you">
         <span>You</span>
@@ -74,7 +83,12 @@
       <button id="showConnectionMessageButton">HomePage</button>
     </div>
     <div class="reset-loading-message">
-      <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
       <p>Waiting for player response...</p>
     </div>
   </div>

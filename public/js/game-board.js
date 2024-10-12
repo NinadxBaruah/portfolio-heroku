@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Set the value of the game link for sharing the room
   inputBox.value =
-    `${window.location.protocol}//${window.location.host}/multiplayer/game-board-2/${window.roomDetails.roomId}` +
+    `${window.location.protocol}//${window.location.host}/projects/tic-tac-toe/multiplayer/game-board-2/${window.roomDetails.roomId}` +
     `/?move=${
       window.roomDetails.firstMove == "You" ? "Opponent" : "You"
     }&symbol=${opponentSymbol}`;

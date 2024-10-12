@@ -1,5 +1,8 @@
+
+
+
 const handleHomePage = (req , res) =>{
-    res.render('index')
+    res.render('ninadbaruah')
 }
 
 

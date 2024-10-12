@@ -65,7 +65,7 @@ createButton.addEventListener("click", async() => {
       const absoluteUrl = new URL(domainUrl);
       const hostName = absoluteUrl.host;
       const response = await fetch(
-        `https://${hostName}/multiplayer/create-game`,
+        `https://${hostName}/projects/tic-tac-toe/multiplayer/create-game`,
         {
             method: "POST",
             headers: {"Content-Type":"application/json"},
@@ -74,7 +74,7 @@ createButton.addEventListener("click", async() => {
       );
       const data = await response.json()
       if(data.roomId){
-        window.location.href = `/multiplayer/game-board/${data.roomId}`
+        window.location.href = `/projects/tic-tac-toe/multiplayer/game-board/${data.roomId}`
       }else{
         alert(`Failed to create game. (Message: ${data.message}`)
       }

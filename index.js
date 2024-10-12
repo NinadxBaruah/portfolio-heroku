@@ -10,6 +10,7 @@ const configureWebSocket = require('./socket/index')
 
 //app require
 const multiplayerRoute = require("./routes/http.route/multiplayerRoute")
+const projects = require("./routes/http.route/projects")
 const homepage = require("./routes/http.route/homepage")
 // PORT 
 const PORT = process.env.PORT || 3000
@@ -22,8 +23,10 @@ app.set('view engine', 'ejs')
 app.use(express.static(path.resolve(__dirname , 'public')))
 app.use(express.json())
 
+
 app.use('/',homepage)
-app.use('/multiplayer',multiplayerRoute)
+app.use('/projects',projects)
+// app.use('projects/multiplayer',multiplayerRoute)
 
 
 // WebSocket server

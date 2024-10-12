@@ -60,3 +60,14 @@ h1 {
     outline: none;
     box-shadow: 0 0 0 3px rgba(0, 255, 0, 0.5);
 }
+
+footer{
+    position: absolute;
+    bottom: 15px;
+    font-size: clamp(7px,2vw,10px);
+}
+
+footer a{
+    text-decoration: underline;
+    cursor: pointer;
+}
