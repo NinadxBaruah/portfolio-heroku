@@ -65,7 +65,7 @@ createButton.addEventListener("click", async() => {
       const absoluteUrl = new URL(domainUrl);
       const hostName = absoluteUrl.host;
       const response = await fetch(
-        `http://${hostName}/multiplayer/create-game`,
+        `https://${hostName}/multiplayer/create-game`,
         {
             method: "POST",
             headers: {"Content-Type":"application/json"},
