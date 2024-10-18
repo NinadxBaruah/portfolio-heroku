@@ -10,8 +10,7 @@
     "client": "cd client && npm run dev",
     "build": "cd client && npm run build",
     "dev:full": "concurrently \"npm run dev\" \"npm run client\"",
-    "install:full": "npm install && cd client && npm install",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "install:full": "npm install && cd client && npm install"
   },
   "keywords": [],
   "author": "",

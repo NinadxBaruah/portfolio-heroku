@@ -51,14 +51,14 @@ app.use("/", homepage);
 
 // app.use('projects/multiplayer',multiplayerRoute)
 // React App Route - Serve index.html for all non-API routes in production
-if (process.env.NODE_ENV === 'production') {
-  app.get('*', (req, res) => {
-    // Exclude API and legacy routes
-    if (!req.path.startsWith('/api') && !req.path.startsWith('/legacy')) {
-      res.sendFile(path.join(__dirname, 'client/dist', 'index.html'));
-    }
-  });
-}
+// if (process.env.NODE_ENV === 'production') {
+//   app.get('*', (req, res) => {
+//     // Exclude API and legacy routes
+//     if (!req.path.startsWith('/api') && !req.path.startsWith('/legacy')) {
+//       res.sendFile(path.join(__dirname, 'client/dist', 'index.html'));
+//     }
+//   });
+// }
 
 
 // WebSocket server
