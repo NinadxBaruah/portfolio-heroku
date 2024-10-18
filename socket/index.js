@@ -5,6 +5,9 @@ const {
   deleteRoom,
 } = require("../utils/create-game-room");
 
+const {setFriendsRoom , getFriendsRoom , friendsRoom} = require("../utils/friendsRoom")
+
+const jwt = require("jsonwebtoken")
 function onSocketPreError(e) {
   console.log("Socket Pre Error", e);
 }
@@ -19,10 +22,28 @@ module.exports = function configure(server) {
   //conneciton to WebSocket, we can do auth here also distroy the socket if needed
   server.on("upgrade", (req, socket, head) => {
     socket.on("error", onSocketPreError);
-    if ("goodAuth") {
+    const urlParts = req.url.split("/");
+    if(urlParts[1] == 'multiplayer'){
       wss.handleUpgrade(req, socket, head, (ws) => {
         socket.removeListener("error", onSocketPreError);
         wss.emit("connection", ws, req);
+      });
+    }
+    else if(urlParts[1] == 'send-message'){
+      const authToken = req.headers["sec-websocket-protocol"];
+      jwt.verify(authToken, process.env.jwt_secret, (err, user) => {
+        if (err) {
+          console.log("JWT verification failed:", err);
+          socket.destroy();
+          return;
+        }
+  
+        req.user = user.userId;
+  
+        wss.handleUpgrade(req, socket, head, (ws) => {
+          socket.removeListener("error", onSocketPreError);
+          wss.emit("connection", ws, req);
+        });
       });
     }
   });
@@ -113,5 +134,69 @@ module.exports = function configure(server) {
         // console.log(getGameRoom(roomId));
       });
     }
+
+    else if (urlParts[1] === "send-message") {
+      const userId = req.user;
+      const storedWs = setFriendsRoom(userId, ws);
+      // console.log("number of connected user",friendsRoom.size)
+      ws.on("message", async (data) => {
+        try {
+          const { type, name , sendTo, message } = JSON.parse(data.toString());
+          // console.log("Received message:", {
+          //   type,
+          //   sendTo,
+          //   fromUserId: userId,
+          //   messageContent: message,
+          // });
+
+          if (type === "send") {
+            
+            const recipientWs = getFriendsRoom(sendTo);
+            if (recipientWs) {
+              recipientWs.send(
+                JSON.stringify({
+                  type: "receive",
+                  from: userId,
+                  name:name,
+                  message: message,
+                  timestamp: new Date().toISOString(),
+                })
+              ); 
+
+            //   ws.send(
+            //     JSON.stringify({
+            //       type: "sent",
+            //       to: sendTo,
+            //       message: message,
+            //       timestamp: new Date().toISOString(),
+            //     })
+            //   );
+            } else {
+              ws.send(
+                JSON.stringify({
+                  type: "error",
+                  error: "Recipient not found or offline",
+                  to: sendTo,
+                  timestamp: new Date().toISOString(),
+                })
+              );
+            }
+          }
+        } catch (error) {
+          console.error("Error processing message:", error);
+        }
+      });
+
+      // Clean up on disconnect
+      ws.on("close", () => {
+        // console.log("Client disconnected:", userId);
+        // console.log("Removing from friendsRoom map...");
+        const stringId = userId.toString();
+        friendsRoom.delete(stringId);
+        // console.log("Map size after removal:", friendsRoom.size);
+      });
+    }
+
+
   });
 };

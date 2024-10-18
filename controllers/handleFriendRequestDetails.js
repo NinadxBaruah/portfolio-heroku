@@ -1,0 +1,41 @@
+const FriendRequest = require("../db/FriendRequest");
+const User = require("../db/userModel");
+
+const handleFriendRequestDetails = async (req, res) => {
+  const user_id = req.user;
+
+  if (!user_id) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  try {
+    const friendRequests = (
+      await FriendRequest.find({ recipient: user_id })
+    ).filter((item) => item.status != "accept");
+    if (friendRequests.length > 0) {
+      // const senders = await Promise.all(
+      //   friendRequests.map(async (request) => {
+      //     const senderDetails = await User.findOne({ _id: request.sender });
+      //     return senderDetails;
+      //   })
+      // );
+      const senders = await User.find({
+        _id: { $in: friendRequests.map((request) => request.sender) },
+      });
+      // console.log(friendRequests);
+      const senderInfos = senders.map((sender) => {
+        return {
+          id: sender._id,
+          name: sender.name,
+          image: sender.picture,
+        };
+      });
+      res.status(200).json({ message: "success", senderInfos });
+    }
+  } catch (err) {
+    // console.log(err)
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+module.exports = handleFriendRequestDetails;

@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const absoluteUrl = new URL(domainUrl);
   const hostName = absoluteUrl.host;
   const ws = new WebSocket(
-    `wss://${hostName}/multiplayer/game-board/${window.roomDetails.roomId}`
+    `ws://${hostName}/multiplayer/game-board/${window.roomDetails.roomId}`
   );
   window.ws = ws;
 
