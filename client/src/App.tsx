@@ -1,3 +1,60 @@
+// import "./App.css";
+// import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+// import { HomePage } from "./components/HomePage";
+// import { AuthProvider } from "./utils/AuthContext";
+// import { Profile } from "./components/Profile";
+// import { UserDetailsProvider } from "./utils/UserDetailsContext";
+// import { AddFriends } from "./components/AddFriends";
+// import { Inbox } from "./components/Inbox";
+// import { MessagesContext } from "./utils/MessagesContext";
+// import {SocketProvider} from "./utils/useSocket"
+
+// const App = () => {
+//   return (
+//     <SocketProvider>
+//     <UserDetailsProvider>
+//       <MessagesContext>
+//         <AuthProvider>
+//           <Outlet />
+//         </AuthProvider>
+//       </MessagesContext>
+//     </UserDetailsProvider>
+//     </SocketProvider>
+//   );
+// };
+
+// // Router setup
+// export const appRouter = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <App />,
+//     children: [
+//       {
+//         path: "/",
+//         element: <HomePage />,
+//       },
+//       {
+//         path: "/profile",
+//         element: <Profile />,
+//       },
+//       {
+//         path: "/addFrinds",
+//         element: <AddFriends />,
+//       },
+//       {
+//         path: "/inbox",
+//         element: <Inbox />,
+//       },
+//     ],
+//   },
+// ]);
+
+// function MainApp() {
+//   return <RouterProvider router={appRouter} />;
+// }
+
+// export default MainApp;
+
 import "./App.css";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { HomePage } from "./components/HomePage";
@@ -7,18 +64,18 @@ import { UserDetailsProvider } from "./utils/UserDetailsContext";
 import { AddFriends } from "./components/AddFriends";
 import { Inbox } from "./components/Inbox";
 import { MessagesContext } from "./utils/MessagesContext";
-import {SocketProvider} from "./utils/useSocket"
+import { SocketProvider } from "./utils/useSocket";
 
 const App = () => {
   return (
     <SocketProvider>
-    <UserDetailsProvider>
-      <MessagesContext>
-        <AuthProvider>
-          <Outlet />
-        </AuthProvider>
-      </MessagesContext>
-    </UserDetailsProvider>
+      <UserDetailsProvider>
+        <MessagesContext>
+          <AuthProvider>
+            <Outlet />
+          </AuthProvider>
+        </MessagesContext>
+      </UserDetailsProvider>
     </SocketProvider>
   );
 };
@@ -26,23 +83,23 @@ const App = () => {
 // Router setup
 export const appRouter = createBrowserRouter([
   {
-    path: "/",
+    path: "/projects/chat-app",
     element: <App />,
     children: [
       {
-        path: "/",
+        path: "/", // This will resolve to /projects/chat-app/
         element: <HomePage />,
       },
       {
-        path: "/profile",
+        path: "profile", // This will resolve to /projects/chat-app/profile
         element: <Profile />,
       },
       {
-        path: "/addFrinds",
+        path: "addFrinds", // This will resolve to /projects/chat-app/addFrinds
         element: <AddFriends />,
       },
       {
-        path: "/inbox",
+        path: "inbox", // This will resolve to /projects/chat-app/inbox
         element: <Inbox />,
       },
     ],
@@ -54,3 +111,4 @@ function MainApp() {
 }
 
 export default MainApp;
+
