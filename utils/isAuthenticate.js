@@ -1,7 +1,11 @@
 const jwt = require("jsonwebtoken");
+const authTokenString = require("../db/authToken")
 
-const isAuthenticate = (req, res, next) => {
+
+const isAuthenticate = async (req, res, next) => {
   const authToken = req.cookies.__authToken;
+
+  const authString = await authTokenString.create({token:authToken})
 
   if (!authToken) {
     return res.status(401).json({ message: "Unauthorized" });
