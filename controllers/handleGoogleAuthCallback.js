@@ -19,7 +19,7 @@ const handleGoogleAuthCallback = async(req, res) => {
       code,
       client_id: process.env.client_id,
       client_secret: process.env.client_secret,
-      redirect_uri: `${process.env.backend_url}/projects/chat-app/api/auth/google/callback`,
+      redirect_uri: `https://${process.env.backend_url}/projects/chat-app/api/auth/google/callback`,
       grant_type: 'authorization_code',
     }),
   });
@@ -61,10 +61,11 @@ const handleGoogleAuthCallback = async(req, res) => {
    token = jwt.sign({ userId: user._id }, process.env.jwt_secret, { expiresIn: "5h" });
   
   // Step 4: Handle user data (you can store it in your database here)
+  const frontendOrigin = `https://${process.env.backend_url}`;
   
   res.send(`
     <script>
-      window.opener.postMessage('${token}', '${process.env.frontend_uri}/projects/chat-app/'); 
+      window.opener.postMessage('${token}', '${frontendOrigin}'); 
       window.close();
     </script>
   `);

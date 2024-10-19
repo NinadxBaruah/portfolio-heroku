@@ -56,6 +56,7 @@ const handleUserProfile = async (req, res) => {
       });
     } else {
       userData = await User.findById(user);
+      console.log("friendList: ", friendsListData)
       return res.status(200).json({
         message: "success",
         id:user,

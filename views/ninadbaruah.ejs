@@ -1,97 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ninad Baruah - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/ninadbaruah.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Open Graph meta tags -->
-    <meta property="og:title" content="Ninad Baruah - Portfolio" />
-    <meta
-      property="og:description"
-      content="Explore Ninad Baruah's portfolio featuring projects like Tic Tac Toe Multiplayer, Chatting and Video Calling App, and Packet Loss Test Web App."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://ninadbaruah.me" />
-    <!-- <meta property="og:image" content="https://your-portfolio-domain.com/images/portfolio-thumbnail.jpg"> -->
-    <meta property="og:site_name" content="Ninad Baruah Portfolio" />
-    <meta property="og:locale" content="en_IN" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Twitter meta tags -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Ninad Baruah - Portfolio" />
-    <meta
-      name="twitter:description"
-      content="Explore Ninad Baruah's web development projects and connect with him."
-    />
-    <!-- <meta name="twitter:image" content="https://your-portfolio-domain.com/images/portfolio-thumbnail.jpg"> -->
-    <meta name="twitter:site" content="@NinadBaruah10" />
-  </head>
-  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
     <div class="container">
-      <h1>Ninad Baruah</h1>
-      <h2>Manipal University Jaipur</h2>
-      <h3>Projects</h3>
-      <div class="contact-me">
-        <a href="#contact-section">Contact Me</a>
-      </div>
-      <div class="option-container">
-        <div class="project">
-          <strong>1. Tic Tac Toe Multiplayer Game</strong>
-          <p>
-            A fun multiplayer Tic Tac Toe game where you can challenge your
-            friends. <a href="/projects/tic-tac-toe">live-link</a>
-          </p>
-        </div>
-        <div class="project">
-          <strong>2. Chatting and Video Calling App</strong>
-          <p>
-            (Coming Soon) A platform for real-time chatting and video calls.
-          </p>
-        </div>
-        <div class="project">
-          <strong>3. Packet Loss Test Web App</strong>
-          <p>(Coming Soon) A web app to test network packet loss.</p>
-        </div>
-      </div>
-      <h3>Skills</h3>
-      <ul>
-        <li>Web Development</li>
-        <li>React</li>
-        <li>Node.js</li>
-        <li>Java</li>
-        <li>JavaScript</li>
-        <li>HTML & CSS</li>
-        <li>WebRTC</li>
-        <li>WebSocket</li>
-        <li>GSAP</li>
-        <li>Responsive Design</li>
-        <li>APIs & RESTful Services</li>
-        <li>Version Control (Git)</li>
-      </ul>
-      <h3 id="contact-section">Contact</h3>
-      <p>
-        Email: <a href="mailto:ninadbaruah@gmail.com">ninadbaruah@gmail.com</a>
-      </p>
-      <p>Phone: +91-8638752077</p>
-      <h3>Connect with me</h3>
-      <p>
-        <a href="https://github.com/NinadxBaruah" target="_blank">GitHub</a> |
-        <a href="https://www.linkedin.com/in/ninad-baruah/" target="_blank"
-          >LinkedIn</a
-        >
-      </p>
+        <nav>
+            <h2>Ninad Baruah</h2>
+            <div class="nav-links">
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Hi, I'm Ninad Baruah</h1>
+                <p>MCA Student at Manipal University Jaipur | Full Stack Developer</p>
+                <a href="#contact" class="btn">Get in Touch</a>
+            </div>
+        </section>
+
+        <section id="projects" class="projects">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <h3>Tic Tac Toe Multiplayer</h3>
+                    <p>A real-time multiplayer game where friends can challenge each other online.</p>
+                    <p><strong>Tech:</strong> React, Node.js, WebSocket</p>
+                    <a href="/projects/tic-tac-toe" class="btn">View Project</a>
+                </div>
+                <div class="project-card">
+                    <h3>Chat & Video Call App</h3>
+                    <p>Real-time communication platform with chat and upcoming video calling features.</p>
+                    <p><strong>Tech:</strong> WebRTC, Socket.io, React</p>
+                    <a href="/projects/chat-app" class="btn">View Project</a>
+                </div>
+                <div class="project-card">
+                    <h3>Packet Loss Test App</h3>
+                    <p>Web application for testing network packet loss (Coming Soon)</p>
+                    <p><strong>Tech:</strong> Node.js, WebSocket</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="skills">
+          <h2 class="section-title">Skills & Technologies</h2>
+          <div class="skills-grid">
+              <!-- Frontend Development -->
+              <div class="skill-item">React.js</div>
+              <div class="skill-item">JavaScript</div>
+              <div class="skill-item">TypeScript</div>
+              <div class="skill-item">HTML5</div>
+              <div class="skill-item">CSS3</div>
+              <div class="skill-item">Redux</div>
+              <div class="skill-item">Tailwind CSS</div>
+              <div class="skill-item">Bootstrap</div>
+              <div class="skill-item">GSAP</div>
+
+              <!-- Backend Development -->
+              <div class="skill-item">Node.js</div>
+              <div class="skill-item">Express.js</div>
+              <div class="skill-item">MongoDB</div>
+              <div class="skill-item">MySQL</div>
+              <div class="skill-item">RESTful APIs</div>
+
+              <!-- Programming Languages -->
+              <div class="skill-item">Java</div>
+              <div class="skill-item">Python(basic)</div>
+
+              <!-- Real-time Technologies -->
+              <div class="skill-item">WebSocket</div>
+              <div class="skill-item">WebRTC</div>
+
+              <!-- Developer Tools -->
+              <div class="skill-item">Git</div>
+              <div class="skill-item">GitHub</div>
+              <div class="skill-item">VS Code</div>
+              <div class="skill-item">Postman</div>
+
+              <!-- Cloud & Deployment -->
+              <div class="skill-item">Heroku</div>
+              <div class="skill-item">Netlify</div>
+              <div class="skill-item">Vercel</div>
+
+              <!-- Additional Skills -->
+              <div class="skill-item">Data Structures</div>
+              <div class="skill-item">Algorithms</div>
+              <div class="skill-item">Problem Solving</div>
+          </div>
+      </section>
+
+        <section id="contact" class="contact">
+            <h2 class="section-title">Get in Touch</h2>
+            <p>Email: <a href="mailto:ninadbaruah@gmail.com">ninadbaruah@gmail.com</a></p>
+            <p>Phone: +91-8638752077</p>
+            <div class="social-links">
+                <a href="https://github.com/NinadxBaruah" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/ninad-baruah/" target="_blank">LinkedIn</a>
+            </div>
+        </section>
     </div>
-  </body>
+
+    <script>
+        gsap.from(".hero-content", {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            ease: "power3.out"
+        });
+
+        gsap.from(".project-card", {
+            duration: 0.8,
+            y: 30,
+            opacity: 0,
+            stagger: 0.2,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: ".projects",
+                start: "top center"
+            }
+        });
+
+        gsap.from(".skill-item", {
+            duration: 0.5,
+            scale: 0.8,
+            opacity: 0,
+            stagger: 0.1,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+                trigger: ".skills",
+                start: "top center"
+            }
+        });
+    </script>
+</body>
 </html>

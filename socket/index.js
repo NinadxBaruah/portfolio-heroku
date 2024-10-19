@@ -141,7 +141,7 @@ module.exports = function configure(server) {
       // console.log("number of connected user",friendsRoom.size)
       ws.on("message", async (data) => {
         try {
-          const { type, name , sendTo, message } = JSON.parse(data.toString());
+          const { type, name , sendTo, message , picture} = JSON.parse(data.toString());
           // console.log("Received message:", {
           //   type,
           //   sendTo,
@@ -159,6 +159,7 @@ module.exports = function configure(server) {
                   from: userId,
                   name:name,
                   message: message,
+                  picture:picture,
                   timestamp: new Date().toISOString(),
                 })
               ); 

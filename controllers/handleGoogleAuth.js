@@ -3,7 +3,7 @@ const User = require("../db/userModel");
 const jwt = require("jsonwebtoken");
 
 const handleGoogleAuth = async (req, res) => {
-  const redirectURI = `${process.env.backend_url}/projects/chat-app/api/auth/google/callback`
+  const redirectURI = `https://${process.env.backend_url}/projects/chat-app/api/auth/google/callback`
   const clientId = process.env.client_id;
   
   const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?${querystring.stringify({

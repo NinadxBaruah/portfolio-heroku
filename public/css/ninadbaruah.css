@@ -1,107 +1,172 @@
-html {
-    scroll-behavior: smooth;
+:root {
+  --primary: #2563eb;
+  --secondary: #1e40af;
+  --text: #1f2937;
+  --bg: #ffffff;
+  --gray: #6b7280;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0;
+  margin-bottom: 4rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 6rem;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.hero-content p {
+  font-size: 1.25rem;
+  color: var(--gray);
+  margin-bottom: 2rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary);
+  color: white;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: var(--secondary);
+}
+
+.projects {
+  margin-bottom: 6rem;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  background: #f8fafc;
+  border-radius: 1rem;
+  padding: 2rem;
+  transition: transform 0.3s ease; /* Added 'ease' for smoother animation */
+}
+
+.project-card:hover {
+  transform: scale(1.05); /* Changed from translateY to scale */
+}
+
+.project-card h3 {
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.skills {
+  margin-bottom: 6rem;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.skill-item {
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.skill-item:hover {
+  transform: translateY(-3px);
+}
+
+.contact {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.social-links a {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.social-links a:hover {
+  color: var(--primary);
+}
+
+@media (max-width: 768px) {
+  .hero {
+      grid-template-columns: 1fr;
+      text-align: center;
   }
-  
-  body {
-    font-family: "Roboto", sans-serif;
-    font-style: italic;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    margin: 0;
-    background-color: #f9f9f9; /* Light background */
-    color: #222; /* Dark text color for contrast */
+
+  .nav-links {
+      display: none;
   }
-  
-  .container {
-    background-color: #fff;
-    padding: 40px;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15); /* Softer shadow */
-    text-align: center;
-    width: 90%;
-    max-width: 800px;
-    border: 2px solid #00bfff; /* Bright blue border */
-    position: relative;
-  }
-  
-  h1 {
-    color: #ff00ff; /* Bright title color */
-    margin-bottom: 5px;
-    font-size: 2.5rem;
-  }
-  
-  h2 {
-    color: #00bfff; /* Bright blue subtitle color */
-    margin-bottom: 15px;
-    font-size: 1.75rem;
-  }
-  
-  h3 {
-    color: #00ff00; /* Bright green for headings */
-    margin: 20px 0 10px;
-    font-size: 1.5rem;
-  }
-  
-  .option-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    text-align: left;
-  }
-  
-  .project {
-    background-color: #e8f4fd;
-    padding: 15px;
-    border-radius: 12px;
-    border: 2px solid #00bfff;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    cursor: pointer;
-  }
-  
-  .project:hover {
-    transform: scale(1.03);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    padding: 5px 0;
-    color: #333;
-  }
-  
-  /* Style for the "Contact Me" button */
-  .contact-me {
-    position: fixed; /* Fixed position for better visibility */
-    bottom: 20px; /* Positioned near the bottom */
-    right: 20px;
-    background-color: #4CAF50; /* Green background */
-    color: white;
-    padding: 12px 25px;
-    text-align: center;
-    border-radius: 50px; /* Rounded button for a modern look */
-    font-size: 18px;
-    cursor: pointer;
-    font-family: 'Roboto', sans-serif;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  }
-  
-  .contact-me:hover {
-    background-color: #45a049; /* Darker green on hover */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
-  }
-  
-  .contact-me a {
-    color: white;
-    text-decoration: none;
-  }
-  
-  .contact-me a:hover {
-    text-decoration: underline;
-  }
-  
+}

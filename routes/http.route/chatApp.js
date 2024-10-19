@@ -1,19 +1,25 @@
-const express = require("express")
+const express = require("express");
 const router = express.Router();
-const chatApp = require("./api")
+const chatApp = require("./api");
+const path = require("path"); // <-- Import the path module here
 
+router.use('/api', chatApp);
 
+router.use(express.static(path.join(__dirname, "client/public")));
 
-router.use('/api' , chatApp)
 router.get("/*", (req, res) => {
     if (process.env.NODE_ENV === 'production') {
-      res.sendFile(path.join(__dirname, 'client/dist', 'index.html'));
-    } else {
-      // If in development, you might want to set this up to serve your React app differently.
-      // For example, you can run the React app separately in development mode.
-      res.redirect("http://localhost:5173"); // Adjust according to your setup.
+      console.log(path.resolve(__dirname, '../../client/dist', 'index.html'))
+      res.sendFile(path.join(__dirname, '../../client/dist/index.html'), {
+        headers: {
+          'Content-Type': 'text/html'
+        }
+      });
     }
-  });
+    // else {
+    //   // For development mode, you might want to serve React differently
+    //   res.redirect("http://localhost:5173"); // Adjust according to your setup
+    // }
+});
 
-
-module.exports = router
+module.exports = router;

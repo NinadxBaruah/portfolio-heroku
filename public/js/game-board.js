@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const absoluteUrl = new URL(domainUrl);
   const hostName = absoluteUrl.host;
   const ws = new WebSocket(
-    `ws://${hostName}/multiplayer/game-board/${window.roomDetails.roomId}`
+    `wss://${hostName}/multiplayer/game-board/${window.roomDetails.roomId}`
   );
   window.ws = ws;
   // Function to handle the clock for the player's turn and timeout

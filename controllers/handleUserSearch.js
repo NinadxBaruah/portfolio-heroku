@@ -27,20 +27,23 @@ const handleUserSearch = async (req, res) => {
         }));
 
       const friendRequests = await friendRequest.find({
-        sender: userId,
-        recipient: { $in: filterUserData.map(user => user.id) }
+        $or: [
+          { sender: userId, recipient: { $in: filterUserData.map(user => user.id) } },
+          { recipient: userId, sender: { $in: filterUserData.map(user => user.id) } }
+        ]
       });
 
       const dataToSend = filterUserData.map((item) => {
-        const request = friendRequests.find(req => req.recipient.toString() === item.id);
+        const request = friendRequests.find(req => 
+          (req.recipient.toString() === item.id && req.sender.toString() === userId) ||
+          (req.sender.toString() === item.id && req.recipient.toString() === userId)
+        );
         return {
           ...item,
           isFriendRequestSent: !!request,
           status: request ? request.status : null
         };
       });
-
-      // console.log(dataToSend);
 
       return res.status(200).json({ message: "success", user: dataToSend });
     }
