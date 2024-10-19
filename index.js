@@ -28,14 +28,14 @@ app.use(cookieParser());
 app.use(express.json());
 
 // Set cookies middleware (after cookieParser and before routes)
-app.use((req, res, next) => {
-  res.cookie('cookieName', 'cookieValue', {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production', // Ensures Secure cookies only on HTTPS in production
-    sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax', // SameSite=None for cross-origin requests in production
-  });
-  next();
-});
+// app.use((req, res, next) => {
+//   res.cookie('cookieName', 'cookieValue', {
+//     httpOnly: true,
+//     secure: process.env.NODE_ENV === 'production', // Ensures Secure cookies only on HTTPS in production
+//     sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax', // SameSite=None for cross-origin requests in production
+//   });
+//   next();
+// });
 
 // View engine setup
 app.set("view engine", "ejs");
