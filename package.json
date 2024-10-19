@@ -6,11 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
-    "client": "cd client && npm run dev",
-    "build": "cd client && npm run build",
-    "dev:full": "concurrently \"npm run dev\" \"npm run client\"",
-    "install:full": "npm install && cd client && npm install"
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
