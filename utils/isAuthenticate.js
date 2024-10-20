@@ -1,11 +1,9 @@
 const jwt = require("jsonwebtoken");
-const authTokenString = require("../db/authToken")
 
 
 const isAuthenticate = async (req, res, next) => {
   const authToken = req.cookies.__authToken;
 
-  // const authString = await authTokenString.create({token:authToken})
 
   if (!authToken) {
     return res.status(401).json({ message: "Unauthorized" });
@@ -24,8 +22,7 @@ const isAuthenticate = async (req, res, next) => {
         return res.status(403).json({ message: "Token not yet active" });
       } else {
         console.log("error:", err);
-        // const authString = await authTokenString.create({token:err.toString()})
-        return res.status(403).json({ message: "Forbidden" });
+        return res.status(403).json({ message: "Forbidden", error:err });
       }
     }
 
