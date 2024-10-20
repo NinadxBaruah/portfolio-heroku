@@ -1,91 +1,79 @@
-# Tic-Tac-Toe Game
+# Portfolio Website
 
-A modern implementation of the classic Tic-Tac-Toe game, featuring both offline and online multiplayer modes. Built with EJS for the frontend and WebSocket for real-time online gameplay.
+A personal portfolio website built with Node.js and EJS, showcasing my projects and skills. The website is deployed on Heroku.
 
-## Features
+## 🚀 Live Demo
+[View Live Website](https://ninadbaruah.me)
 
-- 🏠 Offline mode: Play against a friend on the same device
-- 🌐 Online mode: Challenge friends remotely using WebSocket technology
-- 📱 Responsive design: Enjoy the game on various devices and screen sizes
-- 🖥️ Server-side rendering: Fast initial load times with EJS
+## ⚙️ Technologies Used
 
-## Technologies Used
+- **Backend**: Node.js, Express.js
+- **Frontend**: EJS (Embedded JavaScript templating)
+- **Deployment**: Heroku
+- **Version Control**: Git
+- **Database**: MongoDB (if applicable)
 
-- Frontend: EJS (Embedded JavaScript templating)
-- Backend: Node.js with Express.js
-- Real-time Communication: WebSocket (ws library)
+## 🎯 Featured Projects
 
-## Installation
+### 1. Online Multiplayer Tic-Tac-Toe
+A real-time multiplayer Tic-Tac-Toe game where players can:
+- Join game rooms
+- Play against other players in real-time
+- Chat with opponents during the game
 
-1. Clone the repository:
-   ```
-   git clone https://github.com/NinadxBaruah/tic-tac-toe
-   ```
+**Technologies Used:**
+- WebSocket for real-time communication
+- Node.js backend
+- Express.js
+- HTML/CSS/JavaScript frontend
 
-2. Navigate to the project directory:
-   ```
-   cd tic-tac-toe
-   ```
+[View Project](https://ninadbaruah.me/projects/tic-tac-toe) | [GitHub Repository](https://github.com/NinadxBaruah/tic-tac-toe)
 
-3. Install dependencies:
-   ```
-   npm install
-   ```
+### 2. Video & Chat Application
+A React-based application enabling users to:
+- Make video calls
+- Send real-time messages
+- Create chat rooms
+- Share screens
 
-4. Start the server:
-   ```
-   npm start
-   ```
+**Technologies Used:**
+- React.js
+- WebRTC for video streaming
+- WebSocket for real-time messaging
+- Material UI/Tailwind CSS (whichever you used)
 
-5. Open your browser and visit `http://localhost:3000` (or the port shown in your terminal)
+[View Project](https://ninadbaruah.me/projects/chat-app) | [GitHub Repository](link-to-repo)
 
-## How to Play
+## 🛠️ Local Development
 
-### Offline Mode
-1. Open the game in your browser
-2. Select "Offline Mode"
-3. Take turns with a friend to place X's and O's on the grid
-4. The first player to get three in a row (horizontally, vertically, or diagonally) wins!
-
-### Online Mode
-1. Open the game in your browser
-2. Select "Online Mode"
-3. Share the generated game link with a friend
-4. Wait for your friend to join, then start playing!
-
-## Project Structure
-
-```
-tic-tac-toe/
-│
-├── public/
-│   ├── css/
-│   │   └── styles.css
-│   └── js/
-│       └── game.js
-│
-├── views/
-│   ├── index.ejs
-│   ├── game.ejs
-│   └── partials/
-│       ├── header.ejs
-│       └── footer.ejs
-│
-├── server.js
-├── package.json
-└── README.md
+1. Clone the repository
+```bash
+git clone https://github.com/NinadxBaruah/portfolio-heroku.git
 ```
 
-## Contributing
+2. Install dependencies
+```bash
+cd portfolio-heroku
+npm install
+```
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+3. Create a `.env` file in the root directory and add necessary environment variables:
+```env
+PORT=3000
+MONGODB_URI=your_mongodb_uri
+```
 
-## License
+4. Start the development server
+```bash
+npm run dev
+```
 
-[Your chosen license, e.g., MIT License]
+## 📝 Contact
 
-## Contact
+- GitHub: [@NinadxBaruah](https://github.com/NinadxBaruah)
+- LinkedIn: [Your LinkedIn]
+- Email: ninadbaruah@gmail.com
 
-[Your Name] - [Your Email]
+## 📄 License
 
-Project Link: [https://github.com/your-username/tic-tac-toe](https://github.com/your-username/tic-tac-toe)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
