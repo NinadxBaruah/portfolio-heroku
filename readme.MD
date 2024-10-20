@@ -61,6 +61,15 @@ npm install
 ```env
 PORT=3000
 MONGODB_URI=your_mongodb_uri
+client_id="form google console"
+client_secret="form google console"
+url=http://localhost:3000/
+mongo_db_uri="mongodb link"
+jwt_secret="your jwt secret"
+protocol=http://
+frontend_uri=http://localhost:5713
+backend_url=localhost:3000
+NODE_ENV=production
 ```
 
 4. Start the development server
