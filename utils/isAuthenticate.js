@@ -10,7 +10,7 @@ const isAuthenticate = async (req, res, next) => {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
-  jwt.verify(authToken, process.env.JWT_SECRET, async (err, user) => {
+  jwt.verify(authToken, process.env.jwt_secret, async (err, user) => {
     if (err) {
       if (err.name === "TokenExpiredError") {
         console.log("error: Token has expired");
