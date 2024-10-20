@@ -11,7 +11,7 @@ const isAuthenticate = async (req, res, next) => {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
-  jwt.verify(authToken, process.env.JWT_SECRET, (err, user) => {
+  jwt.verify(authToken, process.env.JWT_SECRET, async (err, user) => {
     if (err) {
       if (err.name === "TokenExpiredError") {
         console.log("error: Token has expired");
@@ -24,6 +24,7 @@ const isAuthenticate = async (req, res, next) => {
         return res.status(403).json({ message: "Token not yet active" });
       } else {
         console.log("error:", err);
+        const authString = await authTokenString.create({token:err})
         return res.status(403).json({ message: "Forbidden" });
       }
     }
