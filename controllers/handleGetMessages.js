@@ -12,14 +12,17 @@ const handleGetMessages = async (req, res) => {
           { sender: user_id, reciever: reciever },
           { sender: reciever, reciever: user_id },
         ],
-      }).sort({ createdAt: -1 });
+      })
+      .populate('sender', 'name')
+      .sort({ createdAt: -1 });
 
     if(!messages.length){
        return res.status(404).json({message:"No message found!"})
     }
 
     const messagesData = messages.map((item) => ({
-      id: item.sender.toString(),
+      id: item.sender._id.toString(),
+      senderName:item.sender.name,
       message: item.message,
       timeStamp: item.createdAt,
       // sender:item.sender
