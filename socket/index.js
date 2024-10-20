@@ -17,9 +17,18 @@ function onSocketPostError(e) {
 
 module.exports = function configure(server) {
   const wss = new WebSocketServer({ noServer: true });
-
   // this will triggered when http server try to upgrade the
   //conneciton to WebSocket, we can do auth here also distroy the socket if needed
+
+    // Set up an interval outside the connection handler to send pings to all users
+    setInterval(() => {
+      // Iterate over all connected users in friendsRoom and send ping messages
+      for (const [userId, ws] of friendsRoom.entries()) {
+        if (ws.readyState === WebSocket.OPEN) {
+          ws.send(JSON.stringify({ type: "ping" }));
+        }
+      }
+    }, 30000); // Send ping every 10 seconds
   server.on("upgrade", (req, socket, head) => {
     socket.on("error", onSocketPreError);
     const urlParts = req.url.split("/");
@@ -29,7 +38,7 @@ module.exports = function configure(server) {
         wss.emit("connection", ws, req);
       });
     }
-    else if(urlParts[1] == 'send-message'){
+    else if(urlParts[1] == 'send-message'){ 
       const authToken = req.headers["sec-websocket-protocol"];
       jwt.verify(authToken, process.env.jwt_secret, (err, user) => {
         if (err) {
@@ -142,13 +151,6 @@ module.exports = function configure(server) {
       ws.on("message", async (data) => {
         try {
           const { type, name , sendTo, message , picture} = JSON.parse(data.toString());
-          // console.log("Received message:", {
-          //   type,
-          //   sendTo,
-          //   fromUserId: userId,
-          //   messageContent: message,
-          // });
-
           if (type === "send") {
             
             const recipientWs = getFriendsRoom(sendTo);
@@ -164,14 +166,6 @@ module.exports = function configure(server) {
                 })
               ); 
 
-            //   ws.send(
-            //     JSON.stringify({
-            //       type: "sent",
-            //       to: sendTo,
-            //       message: message,
-            //       timestamp: new Date().toISOString(),
-            //     })
-            //   );
             } else {
               ws.send(
                 JSON.stringify({

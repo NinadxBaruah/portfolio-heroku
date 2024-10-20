@@ -19,23 +19,26 @@ app.set('trust proxy', 1);
 app.use(
   cors({
     origin: process.env.NODE_ENV === "production"
-      ? `${process.env.protocol}${process.env.frontend_uri}`
+      ? "https://ninadbaruah.me"  // Use exact domain
       : "http://localhost:5173",
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   })
 );
+
+// Add these headers explicitly
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+  );
+  next();
+});
 app.use(cookieParser());
 app.use(express.json());
 
-// Set cookies middleware (after cookieParser and before routes)
-// app.use((req, res, next) => {
-//   res.cookie('cookieName', 'cookieValue', {
-//     httpOnly: true,
-//     secure: process.env.NODE_ENV === 'production', // Ensures Secure cookies only on HTTPS in production
-//     sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax', // SameSite=None for cross-origin requests in production
-//   });
-//   next();
-// });
 
 // View engine setup
 app.set("view engine", "ejs");

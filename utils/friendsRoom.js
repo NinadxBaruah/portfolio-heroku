@@ -2,7 +2,6 @@
 
 const friendsRoom = new Map();
 
-
 function setFriendsRoom(id, client) {
     const stringId = id.toString();
     friendsRoom.set(stringId, client);
@@ -14,5 +13,7 @@ function getFriendsRoom(id) {
     const client = friendsRoom.get(stringId);
     return client;
 }
+
+
 
 module.exports = { setFriendsRoom, getFriendsRoom , friendsRoom};
