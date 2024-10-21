@@ -6,6 +6,7 @@ const {
 } = require("../utils/create-game-room");
 
 const {setFriendsRoom , getFriendsRoom , friendsRoom} = require("../utils/friendsRoom")
+const {setvideoChatRoom , getvideoChatRoom , videoChatRoom} = require("../utils/videoChatRoom")
 
 const jwt = require("jsonwebtoken")
 function onSocketPreError(e) {
@@ -37,6 +38,12 @@ module.exports = function configure(server) {
         socket.removeListener("error", onSocketPreError);
         wss.emit("connection", ws, req);
       });
+    }
+    else if(urlParts[1] == 'video-chat'){
+      wss.handleUpgrade(req, socket , head , (ws) =>{
+        socket.removeListener("error", onSocketPreError);
+        wss.emit("connection" , ws,req);
+      })
     }
     else if(urlParts[1] == 'send-message'){ 
       const authToken = req.headers["sec-websocket-protocol"];
@@ -190,6 +197,11 @@ module.exports = function configure(server) {
         friendsRoom.delete(stringId);
         // console.log("Map size after removal:", friendsRoom.size);
       });
+    }
+
+
+    else if( urlParts[1] == 'video-chat'){
+      console.log("client connected in video-chat")
     }
 
 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Screen Sharing WebApp</title>
+    <link rel="stylesheet" href="/css/video-chat.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="video-grid">
+        <video id="localVideo" class="video-player" autoplay playsinline></video>
+        <video id="remoteVideo" class="video-player"></video>
+      </div>
+
+      <div class="id-section">
+        <p class="id-label">Id</p>
+        <p id="userId" class="id-value">12345678</p>
+        <button id="copyId" class="btn btn-secondary">copy</button>
+      </div>
+
+      <div class="call-section">
+        <input type="text" id="callInput" class="call-input" placeholder="Enter ID to call"/>
+        <button id="callButton" class="btn btn-primary">call</button>
+      </div>
+    </div>
+
+    <script src="/js/socket-video-chat.js"></script>
+    <script src="/js/video-chat.js"></script>
+  </body>
+</html>

@@ -19,7 +19,7 @@ app.set('trust proxy', 1);
 app.use(
   cors({
     origin: process.env.NODE_ENV === "production"
-      ? "https://ninadbaurah.me"  // Use exact domain
+      ? "https://ninadbaruah.me"  // Use exact domain
       : "http://localhost:5173",
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -67,9 +67,10 @@ app.use("/projects", projects);
 app.use("/", homepage);
 
 // Start server
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT,'0.0.0.0', () => {
   console.log(`Server listening in the port: ${PORT}`);
 });
 
 // Configure WebSocket
 configureWebSocket(server);
+ 
