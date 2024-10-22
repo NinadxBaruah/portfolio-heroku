@@ -20,7 +20,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   console.log(user_id);
 
   // making socket conenction
-  socket = new WebSocket(`wss://${process.env.backend_url}/video-chat`);
+  const domainUrl = window.location.href;
+  const absoluteUrl = new URL(domainUrl);
+  const hostName = absoluteUrl.host;
+  socket = new WebSocket(`wss://${hostName}/video-chat`);
 
   socket.addEventListener("open", (event) => {
     console.log("Connected to server");
