@@ -14,6 +14,11 @@ function getvideoChatRoom(id) {
     return client;
 }
 
+function hasVideoChatRoom(id) {
+    const stringId = id.toString();
+    return videoChatRoom.has(stringId);
+}
 
 
-module.exports = { setvideoChatRoom, getvideoChatRoom , videoChatRoom};
+
+module.exports = { setvideoChatRoom, getvideoChatRoom , hasVideoChatRoom ,videoChatRoom};

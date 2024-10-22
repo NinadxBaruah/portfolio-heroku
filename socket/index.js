@@ -5,10 +5,19 @@ const {
   deleteRoom,
 } = require("../utils/create-game-room");
 
-const {setFriendsRoom , getFriendsRoom , friendsRoom} = require("../utils/friendsRoom")
-const {setvideoChatRoom , getvideoChatRoom , videoChatRoom} = require("../utils/videoChatRoom")
+const {
+  setFriendsRoom,
+  getFriendsRoom,
+  friendsRoom,
+} = require("../utils/friendsRoom");
+const {
+  setvideoChatRoom,
+  getvideoChatRoom,
+  hasVideoChatRoom,
+  videoChatRoom,
+} = require("../utils/videoChatRoom");
 
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 function onSocketPreError(e) {
   console.log("Socket Pre Error", e);
 }
@@ -21,31 +30,29 @@ module.exports = function configure(server) {
   // this will triggered when http server try to upgrade the
   //conneciton to WebSocket, we can do auth here also distroy the socket if needed
 
-    // Set up an interval outside the connection handler to send pings to all users
-    setInterval(() => {
-      // Iterate over all connected users in friendsRoom and send ping messages
-      for (const [userId, ws] of friendsRoom.entries()) {
-        if (ws.readyState === WebSocket.OPEN) {
-          ws.send(JSON.stringify({ type: "ping" }));
-        }
+  // Set up an interval outside the connection handler to send pings to all users
+  setInterval(() => {
+    // Iterate over all connected users in friendsRoom and send ping messages
+    for (const [userId, ws] of friendsRoom.entries()) {
+      if (ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({ type: "ping" }));
       }
-    }, 30000); // Send ping every 10 seconds
+    }
+  }, 30000); // Send ping every 10 seconds
   server.on("upgrade", (req, socket, head) => {
     socket.on("error", onSocketPreError);
     const urlParts = req.url.split("/");
-    if(urlParts[1] == 'multiplayer'){
+    if (urlParts[1] == "multiplayer") {
       wss.handleUpgrade(req, socket, head, (ws) => {
         socket.removeListener("error", onSocketPreError);
         wss.emit("connection", ws, req);
       });
-    }
-    else if(urlParts[1] == 'video-chat'){
-      wss.handleUpgrade(req, socket , head , (ws) =>{
+    } else if (urlParts[1] == "video-chat") {
+      wss.handleUpgrade(req, socket, head, (ws) => {
         socket.removeListener("error", onSocketPreError);
-        wss.emit("connection" , ws,req);
-      })
-    }
-    else if(urlParts[1] == 'send-message'){ 
+        wss.emit("connection", ws, req);
+      });
+    } else if (urlParts[1] == "send-message") {
       const authToken = req.headers["sec-websocket-protocol"];
       jwt.verify(authToken, process.env.jwt_secret, (err, user) => {
         if (err) {
@@ -53,9 +60,9 @@ module.exports = function configure(server) {
           socket.destroy();
           return;
         }
-  
+
         req.user = user.userId;
-  
+
         wss.handleUpgrade(req, socket, head, (ws) => {
           socket.removeListener("error", onSocketPreError);
           wss.emit("connection", ws, req);
@@ -106,7 +113,7 @@ module.exports = function configure(server) {
             }
             deleteRoom(roomId);
           } catch (e) {
-            console.log("error from closing from message")
+            console.log("error from closing from message");
           }
         }
         // console.log(parsedMessage);
@@ -149,30 +156,28 @@ module.exports = function configure(server) {
         }
         // console.log(getGameRoom(roomId));
       });
-    }
-
-    else if (urlParts[1] === "send-message") {
+    } else if (urlParts[1] === "send-message") {
       const userId = req.user;
       const storedWs = setFriendsRoom(userId, ws);
       // console.log("number of connected user",friendsRoom.size)
       ws.on("message", async (data) => {
         try {
-          const { type, name , sendTo, message , picture} = JSON.parse(data.toString());
+          const { type, name, sendTo, message, picture } = JSON.parse(
+            data.toString()
+          );
           if (type === "send") {
-            
             const recipientWs = getFriendsRoom(sendTo);
             if (recipientWs) {
               recipientWs.send(
                 JSON.stringify({
                   type: "receive",
                   from: userId,
-                  name:name,
+                  name: name,
                   message: message,
-                  picture:picture,
+                  picture: picture,
                   timestamp: new Date().toISOString(),
                 })
-              ); 
-
+              );
             } else {
               ws.send(
                 JSON.stringify({
@@ -197,13 +202,95 @@ module.exports = function configure(server) {
         friendsRoom.delete(stringId);
         // console.log("Map size after removal:", friendsRoom.size);
       });
+    } else if (urlParts[1] == "video-chat") {
+      let user_id;
+      ws.on("message", (data) => {
+        try {
+          const dataToString = data.toString();
+          const message = JSON.parse(dataToString);
+          // console.log(message)
+
+          if (message.type == "setUser") {
+            user_id = message.user_id;
+            // ws.iceCandidates = [];
+            // ws.SDPoffer = [];
+            setvideoChatRoom(user_id, ws);
+          }
+
+          if (message.type == "call") {
+            const caller_id = message.callerId;
+            const user_id = message.user_id;
+            if (!hasVideoChatRoom(caller_id)) {
+              ws.send(JSON.stringify({ type: "calling-user-not-found" }));
+            } else {
+              const callingClient = getvideoChatRoom(caller_id);
+              callingClient.send(
+                JSON.stringify({ type: "incoming-call", caller_id: user_id })
+              );
+            }
+          }
+
+          if (message.type == "rejectCall") {
+            const caller_id = message.caller_id;
+            const client = getvideoChatRoom(caller_id);
+            client.send(JSON.stringify({ type: "call-rejected" }));
+          }
+
+          if (message.type == "requesting-sdp") {
+            const caller_id = message.caller_id;
+            const user_id = message.user_id;
+            const client = getvideoChatRoom(caller_id);
+            console.log("in requesting sdp", caller_id);
+            client.send(
+              JSON.stringify({
+                type: "requesting-sdp",
+                caller_id: caller_id,
+                user_id: user_id,
+              })
+            );
+          }
+
+          if (message.type == "offer") {
+            const caller_id = message.caller_id;
+            const user_id = message.user_id;
+            const client = getvideoChatRoom(caller_id);
+            const offer = message.offer;
+            client.send(
+              JSON.stringify({
+                type: "remoteOffer",
+                remoteOffer: offer,
+                caller_id: caller_id,
+              })
+            );
+          }
+
+          if (message.type == "answer") {
+            const caller_id = message.caller_id;
+            const answer = message.answer;
+            const client = getvideoChatRoom(caller_id);
+            client.send(
+              JSON.stringify({ type: "remoteAnswer", remoteAnswer: answer })
+            );
+          }
+
+          if (message.type == "candidate") {
+            const caller_id = message.caller_id;
+            if (caller_id) {
+              const candidate = message.candidate;
+              const client = getvideoChatRoom(caller_id);
+              client.send(
+                JSON.stringify({ type: "candidate", candidate: candidate })
+              );
+            }
+          }
+        } catch (error) {
+          console.log("error from the video-chat on message: ", error);
+        }
+      });
+
+      ws.on("close", () => {
+        videoChatRoom.delete(user_id);
+      });
     }
-
-
-    else if( urlParts[1] == 'video-chat'){
-      console.log("client connected in video-chat")
-    }
-
-
   });
 };
