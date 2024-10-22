@@ -1,3 +1,7 @@
+const pillContainer = document.querySelector('.pill-container');
+const loading = document.querySelector('.loading');
+const idSection = document.querySelector('.id-section');
+const callSection = document.querySelector('.call-section');
 class Modal {
     constructor() {
       this.modal = document.getElementById("customModal");
@@ -126,3 +130,80 @@ class Modal {
   
   // Example usage:
   // callNotification.show('John Doe is calling');
+
+
+
+
+  const muteBtn = document.getElementById('muteBtn');
+  const videoBtn = document.getElementById('videoBtn');
+  
+  const micOn = document.querySelector('.mic-on');
+  const micSlash = document.querySelector('.mic-slash');
+  const videoOn = document.querySelector('.video-on');
+  const videoSlash = document.querySelector('.video-slash');
+  const endBtn = document.getElementById('endBtn')
+
+  let isMuted = false;
+  let isVideoOff = false;
+
+  muteBtn.addEventListener('click', () => {
+      isMuted = !isMuted;
+      if (isMuted) {
+          micOn.style.display = 'none';
+          micSlash.style.display = 'block';
+          muteBtn.title = "Unmute";
+      } else {
+          micOn.style.display = 'block';
+          micSlash.style.display = 'none';
+          muteBtn.title = "Mute";
+      }
+      const audioTrack = localStream.getAudioTracks()[0]; // Get the audio track
+      if (audioTrack.enabled) {
+        audioTrack.enabled = false; // Mute the audio
+      } else {
+        audioTrack.enabled = true; // Unmute the audio
+      }
+
+  });
+
+  videoBtn.addEventListener('click', () => {
+      isVideoOff = !isVideoOff;
+      if (isVideoOff) {
+          videoOn.style.display = 'none';
+          videoSlash.style.display = 'block';
+          videoBtn.title = "Start Video";
+      } else {
+          videoOn.style.display = 'block';
+          videoSlash.style.display = 'none';
+          videoBtn.title = "Stop Video";
+      }
+      const videoTrack = localStream.getVideoTracks()[0];
+      if (videoTrack.enabled) {
+        videoTrack.enabled = false; // Stop the video
+      } else {
+        videoTrack.enabled = true; // Resume the video
+      }
+  });
+
+  endBtn.addEventListener('click' , () =>{
+      // Close the RTCPeerConnection
+  if (peerConnection) {
+    peerConnection.close();
+    peerConnection = null;  // Set it to null to indicate it's no longer active
+    console.log("Peer connection closed.");
+  }
+
+  // Stop all local media tracks
+  if (localStream) {
+    localStream.getTracks().forEach(track => {
+      track.stop();  // Stop each track
+    });
+    localStream = null;
+    localVideo.srcObject = null;
+    remoteVideo.srcObject = null;
+    console.log("Local media tracks stopped.");
+  }
+  pillContainer.style.display = 'none'
+  idSection.style.display = 'block'
+  callSection.style.display = 'block'
+  })

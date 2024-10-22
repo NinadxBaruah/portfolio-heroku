@@ -54,6 +54,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           console.log("custom accept");
           caller_id = data.caller_id;
           // console.log(caller_id)
+          idSection.style.display = 'none'
+          callSection.style.display = 'none'
           await askForSdpFromRemoteUser();
         },
         onReject: () => {
@@ -75,6 +77,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     else if (data.type == "requesting-sdp") {
       socket.send(JSON.stringify({type:"offer" , offer:offer, caller_id:data.user_id , user_id:user_id}))
       caller_id = data.user_id
+      loading.style.display = "none"
     }
 
     else if(data.type == "remoteOffer") {
@@ -90,6 +93,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     else if( data.type == "candidate") {
       console.log("ice candidate on socket: ",data.candidate)
       addNewIceCandidate(data.candidate)
+      pillContainer.style.display = "flex"
       // iceCandidates.forEach((ice) =>{
       //   socket.send(
       //     JSON.stringify({

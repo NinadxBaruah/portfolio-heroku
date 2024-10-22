@@ -18,7 +18,7 @@ const peerConfig = {
 
 const constraints = {
   video: true,
-  audio: true,
+  audio: false,
 };
 
 const initiateCall = async () => {
@@ -79,9 +79,29 @@ const createPeerConnection = (remoteOffer) => {
       console.log("***********tracks***********")
       e.streams[0].getTracks().forEach((track) =>{
         remoteStream.addTrack(track , remoteStream);
+        pillContainer.style.display = "flex"
         console.log("track added")
       })
     })
+
+    peerConnection.addEventListener('connectionstatechange', () => {
+    
+      if (peerConnection.connectionState === 'disconnected') {
+        console.log('Peer-to-peer connection disconnected');
+        pillContainer.style.display = 'none'
+        idSection.style.display = 'block'
+        callSection.style.display = 'block'
+        localVideo.srcObject = null;
+        remoteVideo.srcObject = null;
+        // Handle disconnection (e.g., reconnect logic)
+      } else if (peerConnection.connectionState === 'failed') {
+        console.log('Peer connection failed');
+        // Handle failure
+      } else if (peerConnection.connectionState === 'closed') {
+        console.log('Peer connection closed');
+        // Handle the closed connection
+      }
+    });
 
     if(remoteOffer){
       peerConnection.setRemoteDescription(remoteOffer)
@@ -106,6 +126,9 @@ callButton.addEventListener("click", () => {
   }
   else{
     // asking backend to call
+    idSection.style.display = "none"
+    callSection.style.display = "none"
+    loading.style.display = "block"
     socket.send(JSON.stringify({type:"call" , callerId: callInput.value , user_id:user_id}))
     initiateCall();
   }
@@ -168,7 +191,7 @@ const askForSdpFromRemoteUser = () =>{
 const fetchUserMedia = () =>{
   return new Promise(async(resolve , reject) =>{
     try {
-      stream = await navigator.mediaDevices.getUserMedia({video:true , audio:true})
+      stream = await navigator.mediaDevices.getUserMedia({video:false , audio:true})
       localVideo.srcObject = stream
       localStream = stream
       resolve();

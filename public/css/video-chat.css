@@ -42,12 +42,50 @@ body {
   width: 100%;
 }
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
+  .video-grid {
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+  }
+  #localVideo{
+    width: 100%;
+  }
+  #remoteVideo{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+  }
+  
+} */
+
+ @media (min-width: 768px) {
   .video-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
+@media (max-width: 768px) {
+  .video-grid {
+    /* grid-template-columns: repeat(2, 1fr); */
+    position: relative;
+    width: 100%;
+  }
+  #localVideo{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 1px solid white;
+    z-index: 1000;
+    right: 0;
+    bottom: 0;
+    margin-right: 7px;
+    margin-bottom: 7px;
+  }
+  #remoteVideo{
+    width: 100%;
+    height: 70dvh;
+  }
+  
+}
 .video-player {
   width: 100%;
   height: 400px;
@@ -353,4 +391,73 @@ body {
 
 .call-action-btn.reject:hover {
   background-color: rgba(239, 68, 68, 0.2);
+}
+
+.pill-container {
+  display: none;
+  align-items: center;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 12px;
+  background-color: #1f2937;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  width: fit-content;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.control-button {
+  padding: 8px;
+  border: none;
+  background: white;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .control-button:hover {
+  background-color: green;
+} */
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background-color: #4b5563;
+  margin: 0 8px;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.icon-red {
+  color: #ef4444;
+}
+
+.icon-white {
+  color: white;
+}
+
+/* Hide initial slashed icons */
+.mic-slash, .video-slash {
+  display: none;
+}
+#endBtn{
+  background-color: red;
+}
+.loading {
+  display: none;
+}
+.loading img {
+  width: 70px;
+  height: 70px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
