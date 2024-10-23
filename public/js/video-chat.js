@@ -18,7 +18,7 @@ const peerConfig = {
 
 const constraints = {
   video: true,
-  audio: false,
+  audio: true,
 }
 
 const initiateCall = async () => {
@@ -189,7 +189,7 @@ const askForSdpFromRemoteUser = () =>{
 const fetchUserMedia = () =>{
   return new Promise(async(resolve , reject) =>{
     try {
-      stream = await navigator.mediaDevices.getUserMedia({video:false , audio:true})
+      stream = await navigator.mediaDevices.getUserMedia({video:true , audio:true})
       localVideo.srcObject = stream
       localStream = stream
       resolve();
