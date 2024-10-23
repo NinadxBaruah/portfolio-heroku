@@ -18,8 +18,8 @@ const peerConfig = {
 
 const constraints = {
   video: true,
-  audio: true,
-};
+  audio: false,
+}
 
 const initiateCall = async () => {
   try {
@@ -126,11 +126,9 @@ callButton.addEventListener("click", () => {
   }
   else{
     // asking backend to call
-    idSection.style.display = "none"
-    callSection.style.display = "none"
-    loading.style.display = "block"
+
     socket.send(JSON.stringify({type:"call" , callerId: callInput.value , user_id:user_id}))
-    initiateCall();
+    // initiateCall();
   }
 });
 
@@ -191,7 +189,7 @@ const askForSdpFromRemoteUser = () =>{
 const fetchUserMedia = () =>{
   return new Promise(async(resolve , reject) =>{
     try {
-      stream = await navigator.mediaDevices.getUserMedia({video:true , audio:true})
+      stream = await navigator.mediaDevices.getUserMedia({video:false , audio:true})
       localVideo.srcObject = stream
       localStream = stream
       resolve();

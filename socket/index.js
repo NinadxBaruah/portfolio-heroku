@@ -224,6 +224,10 @@ module.exports = function configure(server) {
               ws.send(JSON.stringify({ type: "calling-user-not-found" }));
             } else {
               const callingClient = getvideoChatRoom(caller_id);
+              const initiateCallClient = getvideoChatRoom(user_id);
+              initiateCallClient.send(
+                JSON.stringify({ type: "initiate-call" })
+              );
               callingClient.send(
                 JSON.stringify({ type: "incoming-call", caller_id: user_id })
               );

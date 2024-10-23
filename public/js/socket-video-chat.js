@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     } else if (data.type == "incoming-call") {
       console.log("incoming call");
+      playRingtone();
       caller_id = data.caller_id;
       callNotification.show({
         message: "User is calling",
@@ -57,10 +58,12 @@ document.addEventListener("DOMContentLoaded", async () => {
           idSection.style.display = 'none'
           callSection.style.display = 'none'
           await askForSdpFromRemoteUser();
+          stopRingtone()
         },
         onReject: () => {
           // when user reject the call
           console.log("custom reject");
+          stopRingtone()
           socket.send(JSON.stringify({ type: "rejectCall", caller_id: caller_id }));
         },
       });
@@ -73,6 +76,25 @@ document.addEventListener("DOMContentLoaded", async () => {
         textColor: "#f8fafc",
         accentColor: "#2563eb",
       });
+      if (peerConnection) {
+        peerConnection.close();
+        peerConnection = null;  // Set it to null to indicate it's no longer active
+        console.log("Peer connection closed.");
+      }
+    
+      // Stop all local media tracks
+      if (localStream) {
+        localStream.getTracks().forEach(track => {
+          track.stop();  // Stop each track
+        });
+        localStream = null;
+        localVideo.srcObject = null;
+        remoteVideo.srcObject = null;
+        console.log("Local media tracks stopped.");
+      }
+      loading.style.display = 'none'
+      idSection.style.display = 'block'
+      callSection.style.display = 'block'
     }
     else if (data.type == "requesting-sdp") {
       socket.send(JSON.stringify({type:"offer" , offer:offer, caller_id:data.user_id , user_id:user_id}))
@@ -103,6 +125,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       //     })
       //   );
       // })
+    }
+
+    else if(data.type == "initiate-call") {
+      idSection.style.display = "none"
+      callSection.style.display = "none"
+      loading.style.display = "block"
+      initiateCall()
     }
     // Handle the received data
   });

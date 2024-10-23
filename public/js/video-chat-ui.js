@@ -2,6 +2,11 @@ const pillContainer = document.querySelector('.pill-container');
 const loading = document.querySelector('.loading');
 const idSection = document.querySelector('.id-section');
 const callSection = document.querySelector('.call-section');
+const copyId = document.getElementById('copyId');
+const calling_user_id = document.getElementById('userId');
+const ringtone = new Audio("/mp3/ring.mp3")
+ringtone.loop = true;
+
 class Modal {
     constructor() {
       this.modal = document.getElementById("customModal");
@@ -207,3 +212,28 @@ class Modal {
   idSection.style.display = 'block'
   callSection.style.display = 'block'
   })
+
+  copyId.addEventListener('click' , () =>{
+    navigator.clipboard.writeText(calling_user_id.textContent)
+    .then(() => {
+      console.log('text copied to clipboard')
+      copyId.textContent = 'copied'
+      copyId.style.backgroundColor = "green"
+    }
+    )
+    .catch((error) => console.error('Error copying text:', error));
+  })
+
+
+  // Function to play the ringtone when a call is incoming
+function playRingtone() {
+  ringtone.play().catch((error) => {
+      console.error("Error playing ringtone:", error);
+  });
+}
+
+// Function to stop the ringtone when the call is answered or rejected
+function stopRingtone() {
+  ringtone.pause();
+  ringtone.currentTime = 0;  // Reset playback to start
+}
