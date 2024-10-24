@@ -162,7 +162,7 @@ module.exports = function configure(server) {
       // console.log("number of connected user",friendsRoom.size)
       ws.on("message", async (data) => {
         try {
-          const { type, name, sendTo, message, picture } = JSON.parse(
+          const { type, name,answer, ice , offer, sendTo, message, picture , callTo, user_id } = JSON.parse(
             data.toString()
           );
           if (type === "send") {
@@ -187,6 +187,53 @@ module.exports = function configure(server) {
                   timestamp: new Date().toISOString(),
                 })
               );
+            }
+          }
+          if(type == "video-call"){
+            const callingClient = getFriendsRoom(callTo);
+            if(callingClient){
+              callingClient.send(JSON.stringify({type: "video-call", from: user_id , name:name}));
+            }
+          }
+
+          if(type == "reject") {
+            const clientToSend = getFriendsRoom(sendTo);
+            if(clientToSend) {
+              clientToSend.send(JSON.stringify({type: "reject", from: user_id}))
+            }
+          }
+          if(type=="call-ended") {
+            const clientToSend = getFriendsRoom(sendTo);
+            console.log(sendTo)
+            if(clientToSend) {
+              clientToSend.send(JSON.stringify({type:"call-ended" , from:user_id}))
+            }
+          }
+          if(type == "request-sdp") {
+            const clientToSend = getFriendsRoom(sendTo);
+            if(clientToSend) {
+              clientToSend.send(JSON.stringify({type:"on-request-sdp" ,from:user_id}))
+            }
+          }
+
+          if(type == "offer") {
+            const clientToSend = getFriendsRoom(sendTo);
+            console.log("from offer: ",sendTo)
+            if(clientToSend) {
+              clientToSend.send(JSON.stringify({type:"offer",offer:offer ,from:user_id}))
+            }
+          }
+          if(type == "answer") {
+            const clientToSend = getFriendsRoom(sendTo);
+            console.log("from answer: ",sendTo)
+            if(clientToSend) {
+              clientToSend.send(JSON.stringify({type:"answer",answer:answer ,from:user_id}))
+              }
+          }
+          if(type == "ice") {
+            const clientToSend = getFriendsRoom(sendTo);
+            if(clientToSend) {
+              clientToSend.send(JSON.stringify({type:'ice',ice:ice, from:user_id}))
             }
           }
         } catch (error) {
@@ -287,6 +334,8 @@ module.exports = function configure(server) {
               );
             }
           }
+
+
         } catch (error) {
           console.log("error from the video-chat on message: ", error);
         }
