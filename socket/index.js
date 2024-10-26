@@ -233,8 +233,8 @@ module.exports = function configure(server) {
           if(type == "ice") {
             const clientToSend = getFriendsRoom(sendTo);
             if(clientToSend) {
-              clientToSend.send(JSON.stringify({type:'ice',ice:ice, from:user_id}))
-            }
+              clientToSend.send(JSON.stringify({type:"on:ice",ice:ice ,from:user_id}))
+              }
           }
         } catch (error) {
           console.error("Error processing message:", error);
