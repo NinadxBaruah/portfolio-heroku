@@ -232,9 +232,25 @@ module.exports = function configure(server) {
           }
           if(type == "ice") {
             const clientToSend = getFriendsRoom(sendTo);
+
             if(clientToSend) {
               clientToSend.send(JSON.stringify({type:"on:ice",ice:ice ,from:user_id}))
               }
+          }
+          if(type == "add:ice:on:server") {
+            const clientToSave = getFriendsRoom(user_id);
+            if(clientToSave) {
+              clientToSave.iceCandidates = [...clientToSave.iceCandidates || [] , ice];
+              setFriendsRoom(user_id , clientToSave)
+            }
+          }
+          if(type == "ice:ghathering:complete"){
+            const clientToSend = getFriendsRoom(sendTo);
+            const clentToGetIce =  getFriendsRoom(user_id);
+            const ice = clentToGetIce.iceCandidates;
+            if(clientToSend) {
+              clientToSend.send(JSON.stringify({type:"ice::complete" ,ice:ice, from:user_id}))
+            }
           }
         } catch (error) {
           console.error("Error processing message:", error);
