@@ -204,60 +204,34 @@ module.exports = function configure(server) {
           }
           if(type=="call-ended") {
             const clientToSend = getFriendsRoom(sendTo);
-            console.log(sendTo)
             if(clientToSend) {
               clientToSend.send(JSON.stringify({type:"call-ended" , from:user_id}))
             }
           }
-          if(type == "request-sdp") {
+          if(type == "request:offer") {
             const clientToSend = getFriendsRoom(sendTo);
             if(clientToSend) {
-              clientToSend.send(JSON.stringify({type:"on-request-sdp" ,from:user_id}))
-            }
+              clientToSend.send(JSON.stringify({type: "on:request:offer"}))
           }
-
-          if(type == "offer") {
-            const clientToSend = getFriendsRoom(sendTo);
-            console.log("from offer: ",sendTo)
-            if(clientToSend) {
-              clientToSend.send(JSON.stringify({type:"offer",offer:offer ,from:user_id}))
-            }
+        }
+        if(type == "offer") {
+          const clientToSend = getFriendsRoom(sendTo);
+          if(clientToSend) {
+            clientToSend.send(JSON.stringify({type: "on:offer" , offer:offer}))
+        }
+      }
+      if(type == "answer") {
+        const clientToSend = getFriendsRoom(sendTo);
+        if(clientToSend) {
+          clientToSend.send(JSON.stringify({type: "on:answer" , answer:answer}))
+        }
+      }
+      if(type == "ice") {
+        const clientToSend = getFriendsRoom(sendTo);
+        if(clientToSend) {
+          clientToSend.send(JSON.stringify({type: "on:ice" , ice:ice}))
           }
-          if(type == "answer") {
-            const clientToSend = getFriendsRoom(sendTo);
-            console.log("from answer: ",sendTo)
-            if(clientToSend) {
-              clientToSend.send(JSON.stringify({type:"answer",answer:answer ,from:user_id}))
-              }
-          }
-          if(type == "ice") {
-            const clientToSend = getFriendsRoom(sendTo);
-
-            if(clientToSend) {
-              clientToSend.send(JSON.stringify({type:"on:ice",ice:ice ,from:user_id}))
-              }
-          }
-          // if(type == "add:ice:on:server") {
-          //   const clientToSave = getFriendsRoom(user_id);
-          //   if(clientToSave) {
-          //     clientToSave.iceCandidates = [...clientToSave.iceCandidates || [] , ice];
-          //     setFriendsRoom(user_id , clientToSave)
-          //   }
-          // }
-          // if(type == "ice:ghathering:complete"){
-          //   const clientToSend = getFriendsRoom(sendTo);
-          //   const clentToGetIce =  getFriendsRoom(user_id);
-          //   const ice = clentToGetIce.iceCandidates;
-          //   if(clientToSend) {
-          //     clientToSend.send(JSON.stringify({type:"ice::complete" ,ice:ice, from:user_id}))
-          //   }
-          // }
-          if(type == "ready:for:ice") {
-            const clientToSend = getFriendsRoom(sendTo);
-            if(clientToSend) {
-              clientToSend.send(JSON.stringify({type:"peer:ready:for:ice" ,from:user_id}))
-            }
-          }
+      }
         } catch (error) {
           console.error("Error processing message:", error);
         }
