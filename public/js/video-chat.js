@@ -25,7 +25,8 @@ const initiateCall = async () => {
   try {
     // Access the media devices and set the local video stream
     stream = await navigator.mediaDevices.getUserMedia(constraints);
-    localVideo.srcObject = stream;
+    const videoStream = new MediaStream([stream.getVideoTracks()[0]]);
+    localVideo.srcObject = videoStream;
     localStream = stream;
 
     // Create the peer connection
