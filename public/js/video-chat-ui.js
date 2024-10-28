@@ -211,6 +211,7 @@ class Modal {
   pillContainer.style.display = 'none'
   idSection.style.display = 'block'
   callSection.style.display = 'block'
+  window.location.reload()
   })
 
   copyId.addEventListener('click' , () =>{

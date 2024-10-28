@@ -38,7 +38,14 @@ module.exports = function configure(server) {
         ws.send(JSON.stringify({ type: "ping" }));
       }
     }
-  }, 30000); // Send ping every 10 seconds
+  
+    // Iterate over all connected users in videoChatRoom and send ping messages
+    for (const [userId, ws] of videoChatRoom.entries()) {
+      if (ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({ type: "ping" }));
+      }
+    }
+  }, 30000); // Send ping every 30 seconds
   server.on("upgrade", (req, socket, head) => {
     socket.on("error", onSocketPreError);
     const urlParts = req.url.split("/");
