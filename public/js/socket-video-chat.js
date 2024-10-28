@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             callSection.style.display = "none";
             await askForSdpFromRemoteUser();
             stopRingtone();
+            pillContainer.style.display = "flex";
           },
           onReject: () => {
             // when user reject the call
@@ -84,7 +85,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           peerConnection = null; // Set it to null to indicate it's no longer active
           console.log("Peer connection closed.");
         }
-
+        pillContainer.style.display = "none"
         // Stop all local media tracks
         if (localStream) {
           localStream.getTracks().forEach((track) => {
@@ -134,6 +135,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         callSection.style.display = "none";
         loading.style.display = "block";
         initiateCall();
+      }
+      else if(data.type == "stop:call") {
+        const myButton = document.querySelector(".reject")
+        myButton.click();
+        showCallEndedModal()
+        idSection.style.display = 'block'
+        callSection.style.display = 'block'
+        pillContainer.style.display = 'none'
       }
       // Handle the received data
     });

@@ -1,7 +1,7 @@
 const callButton = document.getElementById("callButton");
 const localVideo = document.getElementById("localVideo");
 const remoteVideo = document.getElementById("remoteVideo");
-const callInput = document.getElementById("callInput");
+
 let stream;
 let localStream;
 let remoteStream;
@@ -127,7 +127,9 @@ callButton.addEventListener("click", () => {
   }
   else{
     // asking backend to call
-
+    pillContainer.style.display = "flex";
+    idSection.style.display = "none"
+    callSection.style.display = "none"
     socket.send(JSON.stringify({type:"call" , callerId: callInput.value , user_id:user_id}))
     // initiateCall();
   }

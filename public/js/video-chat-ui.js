@@ -6,6 +6,21 @@ const copyId = document.getElementById('copyId');
 const calling_user_id = document.getElementById('userId');
 const ringtone = new Audio("/mp3/ring.mp3")
 ringtone.loop = true;
+const callInput = document.getElementById("callInput");
+const callEndedModal = document.getElementById("callEndedModal");
+const closeCallEndedModalBtn = document.getElementById("closeCallEndedModal");
+
+
+// Function to show the modal
+function showCallEndedModal() {
+  callEndedModal.style.display = "block";
+}
+
+// Function to hide the modal
+function hideCallEndedModal() {
+  callEndedModal.style.display = "none";
+}
+closeCallEndedModalBtn.addEventListener("click", hideCallEndedModal);
 
 class Modal {
     constructor() {
@@ -190,7 +205,7 @@ class Modal {
       }
   });
 
-  endBtn.addEventListener('click' , () =>{
+  endBtn.addEventListener('click' , async () =>{
       // Close the RTCPeerConnection
   if (peerConnection) {
     peerConnection.close();
@@ -208,12 +223,24 @@ class Modal {
     remoteVideo.srcObject = null;
     console.log("Local media tracks stopped.");
   }
+ await sendStopCall()
   pillContainer.style.display = 'none'
   idSection.style.display = 'block'
   callSection.style.display = 'block'
   window.location.reload()
   })
 
+  async function  sendStopCall() {
+    return new Promise((resolve , reject) =>{
+      try {
+        socket.send(JSON.stringify({type:'stop:call',callerId:callInput.value}))
+        resolve()
+      } catch (error) {
+        console.log(error)
+        reject()
+      }
+    })
+  }
   copyId.addEventListener('click' , () =>{
     navigator.clipboard.writeText(calling_user_id.textContent)
     .then(() => {

@@ -38,7 +38,7 @@ module.exports = function configure(server) {
         ws.send(JSON.stringify({ type: "ping" }));
       }
     }
-  
+
     // Iterate over all connected users in videoChatRoom and send ping messages
     for (const [userId, ws] of videoChatRoom.entries()) {
       if (ws.readyState === WebSocket.OPEN) {
@@ -169,9 +169,18 @@ module.exports = function configure(server) {
       // console.log("number of connected user",friendsRoom.size)
       ws.on("message", async (data) => {
         try {
-          const { type, name,answer, ice , offer, sendTo, message, picture , callTo, user_id } = JSON.parse(
-            data.toString()
-          );
+          const {
+            type,
+            name,
+            answer,
+            ice,
+            offer,
+            sendTo,
+            message,
+            picture,
+            callTo,
+            user_id,
+          } = JSON.parse(data.toString());
           if (type === "send") {
             const recipientWs = getFriendsRoom(sendTo);
             if (recipientWs) {
@@ -196,49 +205,63 @@ module.exports = function configure(server) {
               );
             }
           }
-          if(type == "video-call"){
+          if (type == "video-call") {
             const callingClient = getFriendsRoom(callTo);
-            if(callingClient){
-              callingClient.send(JSON.stringify({type: "video-call", from: user_id , name:name}));
+            if (callingClient) {
+              callingClient.send(
+                JSON.stringify({
+                  type: "video-call",
+                  from: user_id,
+                  name: name,
+                })
+              );
             }
           }
 
-          if(type == "reject") {
+          if (type == "reject") {
             const clientToSend = getFriendsRoom(sendTo);
-            if(clientToSend) {
-              clientToSend.send(JSON.stringify({type: "reject", from: user_id}))
+            if (clientToSend) {
+              clientToSend.send(
+                JSON.stringify({ type: "reject", from: user_id })
+              );
             }
           }
-          if(type=="call-ended") {
+          if (type == "call-ended") {
             const clientToSend = getFriendsRoom(sendTo);
-            if(clientToSend) {
-              clientToSend.send(JSON.stringify({type:"call-ended" , from:user_id}))
+            if (clientToSend) {
+              clientToSend.send(
+                JSON.stringify({ type: "call-ended", from: user_id })
+              );
             }
           }
-          if(type == "request:offer") {
+          if (type == "request:offer") {
             const clientToSend = getFriendsRoom(sendTo);
-            if(clientToSend) {
-              clientToSend.send(JSON.stringify({type: "on:request:offer"}))
+            if (clientToSend) {
+              clientToSend.send(JSON.stringify({ type: "on:request:offer" }));
+            }
           }
-        }
-        if(type == "offer") {
-          const clientToSend = getFriendsRoom(sendTo);
-          if(clientToSend) {
-            clientToSend.send(JSON.stringify({type: "on:offer" , offer:offer}))
-        }
-      }
-      if(type == "answer") {
-        const clientToSend = getFriendsRoom(sendTo);
-        if(clientToSend) {
-          clientToSend.send(JSON.stringify({type: "on:answer" , answer:answer}))
-        }
-      }
-      if(type == "ice") {
-        const clientToSend = getFriendsRoom(sendTo);
-        if(clientToSend) {
-          clientToSend.send(JSON.stringify({type: "on:ice" , ice:ice}))
+          if (type == "offer") {
+            const clientToSend = getFriendsRoom(sendTo);
+            if (clientToSend) {
+              clientToSend.send(
+                JSON.stringify({ type: "on:offer", offer: offer })
+              );
+            }
           }
-      }
+          if (type == "answer") {
+            const clientToSend = getFriendsRoom(sendTo);
+            if (clientToSend) {
+              clientToSend.send(
+                JSON.stringify({ type: "on:answer", answer: answer })
+              );
+            }
+          }
+          if (type == "ice") {
+            const clientToSend = getFriendsRoom(sendTo);
+            if (clientToSend) {
+              clientToSend.send(JSON.stringify({ type: "on:ice", ice: ice }));
+            }
+          }
         } catch (error) {
           console.error("Error processing message:", error);
         }
@@ -338,7 +361,15 @@ module.exports = function configure(server) {
             }
           }
 
+          if (message.type == "stop:call") {
+            const caller_id = message.callerId;
+            console.log(caller_id);
+            if (caller_id) {
+              const client = getvideoChatRoom(caller_id);
 
+              if(client)client.send(JSON.stringify({ type: "stop:call" }));
+            }
+          }
         } catch (error) {
           console.log("error from the video-chat on message: ", error);
         }
