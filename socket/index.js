@@ -243,6 +243,7 @@ module.exports = function configure(server) {
           if (type == "offer") {
             const clientToSend = getFriendsRoom(sendTo);
             if (clientToSend) {
+              console.log("sending offer")
               clientToSend.send(
                 JSON.stringify({ type: "on:offer", offer: offer })
               );
@@ -254,9 +255,16 @@ module.exports = function configure(server) {
               clientToSend.send(
                 JSON.stringify({ type: "on:answer", answer: answer })
               );
-              // console.log("got answer and sending answer to: ",sendTo)
-              // console.log("answer: ",answer.type)
+              console.log("value of type: ",type)
+              console.log("got answer and sending answer to: ",sendTo)
+              console.log("answer: ",answer.type)
               // console.log("client: ",clientToSend)
+            }
+          }
+          if(type == "request:answer") {
+            const clientToSend = getFriendsRoom(sendTo);
+            if (clientToSend) {
+              clientToSend.send(JSON.stringify({type:"on:request:answer" , from:user_id}))
             }
           }
           if (type == "ice") {
