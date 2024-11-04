@@ -249,6 +249,14 @@ module.exports = function configure(server) {
               );
             }
           }
+          if(type == "sending:answer") {
+            const clientToSend = getFriendsRoom(sendTo);
+            if (clientToSend) {
+              clientToSend.send(
+                JSON.stringify({type: "got:answer",answer:answer})
+              )
+            }
+          }
           if (type == "answer") {
             const clientToSend = getFriendsRoom(sendTo);
             if (clientToSend) {
