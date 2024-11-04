@@ -254,6 +254,9 @@ module.exports = function configure(server) {
               clientToSend.send(
                 JSON.stringify({ type: "on:answer", answer: answer })
               );
+              // console.log("got answer and sending answer to: ",sendTo)
+              // console.log("answer: ",answer.type)
+              // console.log("client: ",clientToSend)
             }
           }
           if (type == "ice") {
