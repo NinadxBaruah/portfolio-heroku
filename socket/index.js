@@ -266,6 +266,12 @@ module.exports = function configure(server) {
               clientToSend.send(JSON.stringify({type:"stop:sending:answer"}))
               }
           }
+          if(type == "request:restart") {
+            const clientToSend = getFriendsRoom(sendTo);
+            if(clientToSend) {
+              clientToSend.send(JSON.stringify({type:"request:restart"}))
+              }
+          }
         } catch (error) {
           console.error("Error processing message:", error);
         }
