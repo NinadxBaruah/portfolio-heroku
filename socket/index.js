@@ -173,7 +173,7 @@ module.exports = function configure(server) {
             type,
             name,
             answer,
-            ice,
+            candidate,
             offer,
             sendTo,
             message,
@@ -241,7 +241,7 @@ module.exports = function configure(server) {
               clientToSend.send(JSON.stringify({type:"on:request:offer"}))
             }
           }
-
+ 
           if(type == "on:offer") {
             const clientToSend = getFriendsRoom(sendTo);
             if(clientToSend) {
@@ -252,6 +252,12 @@ module.exports = function configure(server) {
             const clientToSend = getFriendsRoom(sendTo);
             if(clientToSend) {
               clientToSend.send(JSON.stringify({type:"on:answer" , answer:answer}))
+              }
+          }
+          if(type == "on:ice") {
+            const clientToSend = getFriendsRoom(sendTo);
+            if(clientToSend) {
+              clientToSend.send(JSON.stringify({type:"on:ice" , candidate:candidate}))
               }
           }
         } catch (error) {
