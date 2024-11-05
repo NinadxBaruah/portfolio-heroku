@@ -260,6 +260,12 @@ module.exports = function configure(server) {
               clientToSend.send(JSON.stringify({type:"on:ice" , candidate:candidate}))
               }
           }
+          if(type == "stop:sending:answer") {
+            const clientToSend = getFriendsRoom(sendTo);
+            if(clientToSend) {
+              clientToSend.send(JSON.stringify({type:"stop:sending:answer"}))
+              }
+          }
         } catch (error) {
           console.error("Error processing message:", error);
         }
