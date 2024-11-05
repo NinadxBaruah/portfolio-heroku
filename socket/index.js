@@ -234,52 +234,25 @@ module.exports = function configure(server) {
               );
             }
           }
-          if (type == "request:offer") {
+         
+          if(type == "request:offer") {
             const clientToSend = getFriendsRoom(sendTo);
-            if (clientToSend) {
-              clientToSend.send(JSON.stringify({ type: "on:request:offer" }));
+            if(clientToSend) {
+              clientToSend.send(JSON.stringify({type:"on:request:offer"}))
             }
           }
-          if (type == "offer") {
+
+          if(type == "on:offer") {
             const clientToSend = getFriendsRoom(sendTo);
-            if (clientToSend) {
-              console.log("sending offer")
-              clientToSend.send(
-                JSON.stringify({ type: "on:offer", offer: offer })
-              );
+            if(clientToSend) {
+              clientToSend.send(JSON.stringify({type:"on:offer" , offer:offer}))
             }
           }
-          if(type == "sending:answer") {
+          if( type == "on:answer") {
             const clientToSend = getFriendsRoom(sendTo);
-            if (clientToSend) {
-              clientToSend.send(
-                JSON.stringify({type: "got:answer",answer:answer})
-              )
-            }
-          }
-          if (type == "answer") {
-            const clientToSend = getFriendsRoom(sendTo);
-            if (clientToSend) {
-              clientToSend.send(
-                JSON.stringify({ type: "on:answer", answer: answer })
-              );
-              console.log("value of type: ",type)
-              console.log("got answer and sending answer to: ",sendTo)
-              console.log("answer: ",answer.type)
-              // console.log("client: ",clientToSend)
-            }
-          }
-          if(type == "request:answer") {
-            const clientToSend = getFriendsRoom(sendTo);
-            if (clientToSend) {
-              clientToSend.send(JSON.stringify({type:"on:request:answer" , from:user_id}))
-            }
-          }
-          if (type == "ice") {
-            const clientToSend = getFriendsRoom(sendTo);
-            if (clientToSend) {
-              clientToSend.send(JSON.stringify({ type: "on:ice", ice: ice }));
-            }
+            if(clientToSend) {
+              clientToSend.send(JSON.stringify({type:"on:answer" , answer:answer}))
+              }
           }
         } catch (error) {
           console.error("Error processing message:", error);
