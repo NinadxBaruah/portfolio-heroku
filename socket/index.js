@@ -278,6 +278,10 @@ module.exports = function configure(server) {
           }
           if (type == "on:offer:reset") {
             const clientToSend = getFriendsRoom(sendTo);
+            const userIDs = getFriendsRoom(user_id);
+            if(userIDs) {
+              userIDs.send(JSON.stringify({ type: "on:offer:reset" ,offer:offer}));
+            }
             if (clientToSend) {
               clientToSend.send(JSON.stringify({ type: "on:offer:reset" ,offer:offer}));
             }
