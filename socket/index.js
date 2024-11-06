@@ -205,6 +205,16 @@ module.exports = function configure(server) {
               );
             }
           }
+          if(type == "is:online") {
+            const is_user_available = getFriendsRoom(sendTo);
+            const senderId = getFriendsRoom(user_id);
+            if(is_user_available){
+              senderId.send(JSON.stringify({type:"online:status",isOnline:"online"}))
+            }
+            else{
+              senderId.send(JSON.stringify({type:"online:status",isOnline:"offline"}))
+            }
+          }
           if (type == "video-call") {
             const callingClient = getFriendsRoom(callTo);
             if (callingClient) {
