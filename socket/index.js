@@ -254,6 +254,7 @@ module.exports = function configure(server) {
  
           if(type == "on:offer") {
             const clientToSend = getFriendsRoom(sendTo);
+            console.log("offer recieved")
             if(clientToSend) {
               clientToSend.send(JSON.stringify({type:"on:offer" , offer:offer}))
             }
@@ -341,7 +342,7 @@ module.exports = function configure(server) {
             const caller_id = message.caller_id;
             const user_id = message.user_id;
             const client = getvideoChatRoom(caller_id);
-            console.log("in requesting sdp", caller_id);
+            // console.log("in requesting sdp", caller_id);
             client.send(
               JSON.stringify({
                 type: "requesting-sdp",
