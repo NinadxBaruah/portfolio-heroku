@@ -277,6 +277,12 @@ module.exports = function configure(server) {
               clientToSend.send(JSON.stringify({type:"stop:sending:answer"}))
               }
           }
+          if(type == "stop:sending:offer") {
+            const clientToSend = getFriendsRoom(sendTo);
+            if(clientToSend) {
+              clientToSend.send(JSON.stringify({type:"stop:sending:offer"}))
+              }
+          }
           if (type == "on:offer:reset") {
             const clientToSend = getFriendsRoom(sendTo);
             const userIDs = getFriendsRoom(user_id);
@@ -286,6 +292,12 @@ module.exports = function configure(server) {
             if (clientToSend) {
               clientToSend.send(JSON.stringify({ type: "on:offer:reset" ,offer:offer}));
             }
+          }
+          if(type == "user:typing"){
+            const clientToSend = getFriendsRoom(sendTo);
+            if(clientToSend) {
+              clientToSend.send(JSON.stringify({type:"user:typing"}))
+              }
           }
         } catch (error) {
           console.error("Error processing message:", error);
