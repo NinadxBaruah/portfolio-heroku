@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A real-time video calling app for seamless communication." />
+    <meta name="keywords" content="Video call, WebRTC, real-time communication, video chat, chat app" />
+    <meta name="author" content="Ninad Baruah" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Video Calling App" />
+    <meta property="og:description" content="Connect with friends and colleagues through high-quality video calls." />
+    <meta property="og:image" content="/images/video-call-preview.png" />
+    <meta property="og:url" content="https://yourwebsite.com/videocall" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Video Calling App" />
+    <meta name="twitter:description" content="Enjoy smooth and reliable video calling with our app." />
+    <meta name="twitter:image" content="/images/video-call-preview.png" />
+    <title>Video Calling App</title>
+    <link rel="stylesheet" href="/css/video-chat.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="video-grid">
+        <video
+          id="localVideo"
+          class="video-player"
+          autoplay
+          playsinline
+        ></video>
+        <video id="remoteVideo" class="video-player" autoplay
+        playsinline
+      ></video>
+      </div>
+      <div class="pill-container">
+        <button class="control-button" id="muteBtn" title="Mute">
+            <img src="/images/microphone.svg" class="icon mic-on" alt="Microphone"/>
+            <img src="/images/microphone-slash.svg" class="icon mic-slash" alt="Microphone muted"/>
+        </button>
+
+        <button class="control-button" id="videoBtn" title="Stop Video">
+            <img src="/images/video.svg" class="icon video-on" alt="Video"/>
+            <img src="/images/video-slash.svg" class="icon video-slash" alt="Video stopped"/>
+        </button>
+
+        <div class="divider"></div>
+
+        <button class="control-button" id="endBtn" title="End Call">
+            <img src="/images/end-call.svg" class="icon icon-red" alt="End call"/>
+        </button>
+    </div>
+    <div class="loading">
+      <img id="myGif" src="/images/loading.gif" alt="Loading..." />
+    </div>
+    
+
+      <div class="id-section">
+        <p class="id-label">Id</p>
+        <p id="userId" class="id-value">12345678</p>
+        <button id="copyId" class="btn btn-secondary">copy</button>
+      </div>
+
+      <div class="call-section">
+        <input
+          type="text"
+          id="callInput"
+          required
+          class="call-input"
+          placeholder="Enter ID to call"
+        />
+        <button type="submit" id="callButton" class="btn btn-primary">
+          call
+        </button>
+      </div>
+    </div>
+
+    <!-- Add this HTML where you want the modal to appear -->
+    <div id="customModal" class="modal">
+      <div class="modal-overlay"></div>
+      <div class="modal-container">
+        <button class="modal-close">&times;</button>
+        <h2 class="modal-title">Notification</h2>
+        <div class="modal-content">
+          <p class="modal-message">This is a modal message</p>
+          <button class="modal-button btn btn-primary">Close</button>
+        </div>
+      </div>
+    </div>
+    <!-- call ended modal -->
+    <div id="callEndedModal" class="call-ended-modal">
+      <div class="call-ended-modal-content">
+        <h2>Call Ended</h2>
+        <p>The call has been ended.</p>
+        <button id="closeCallEndedModal">Close</button>
+      </div>
+    </div>
+    <!-- Add this HTML before the closing body tag -->
+    <div id="callNotification" class="call-notification">
+      <div class="call-notification-content">
+        <p class="call-message">User is calling</p>
+        <div class="call-actions">
+          <button class="call-action-btn accept">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+              />
+            </svg>
+          </button>
+          <button class="call-action-btn reject">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="1" y1="1" x2="23" y2="23"></line>
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="/js/video-chat-ui.js"></script>
+    <script src="/js/socket-video-chat.js"></script>
+    <script src="/js/video-chat.js"></script>
+  </body>
+</html>
