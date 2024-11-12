@@ -24,6 +24,7 @@ const handleGetMessages = async (req, res) => {
       id: item.sender._id.toString(),
       senderName:item.sender.name,
       message: item.message,
+    picture:item.image,
       timeStamp: item.createdAt,
       // sender:item.sender
     }));

@@ -64,7 +64,7 @@ const handleGoogleAuthCallback = async(req, res) => {
   
   res.send(`
     <script>
-      window.opener.postMessage('${token}', "https://ninadbaruah.me");  
+      window.opener.postMessage('${token}', "https://ninadbaruah.me"); 
       window.close();
     </script>
   `);

@@ -5,6 +5,9 @@ const MessagesSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  image:{
+    type:String
+  },
   sender: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

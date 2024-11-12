@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 const handleSendMessage = async (req, res) => {
   const senderId = req.user;
-  const { message, recieverId, type } = req.body;
+  const { message, recieverId, type, image } = req.body;
 
   if (type === "send") {
     if (!senderId || !message || !recieverId) {
@@ -13,6 +13,7 @@ const handleSendMessage = async (req, res) => {
     try {
       const Message = await Messages.create({
         message: message,
+        image: image ? image : "",
         sender: senderId,
         reciever: recieverId,
       });
@@ -22,7 +23,9 @@ const handleSendMessage = async (req, res) => {
         return res.status(400).json({ message: "Message not sent" });
       }
 
-      return res.status(201).json({ message: "Message Successfully created!" });
+      return res
+        .status(201)
+        .json({ message: "Message Successfully created!", Message });
     } catch (err) {
       console.log(err);
       return res.status(500).json({ message: "Internal Server Error" });
@@ -49,14 +52,14 @@ const handleSendMessage = async (req, res) => {
         if (item.sender == senderId) {
           return {
             id: item.reciever,
-            sender:senderId,
+            sender: senderId,
             message: item.message,
             timeStamp: item.createdAt,
           };
         } else {
           return {
             id: item.sender,
-            sender:item.sender,
+            sender: item.sender,
             message: item.message,
             timeStamp: item.createdAt,
           };
@@ -68,7 +71,9 @@ const handleSendMessage = async (req, res) => {
       });
 
       const mergedData = userIds.map((user) => {
-        const matchedUser = userData.find(data => data._id.toString() === user.id.toString());
+        const matchedUser = userData.find(
+          (data) => data._id.toString() === user.id.toString()
+        );
         return {
           ...user,
           name: matchedUser ? matchedUser.name : "",
@@ -76,7 +81,7 @@ const handleSendMessage = async (req, res) => {
         };
       });
       // console.log(userData)
-      return res.status(200).json({ message:"success" ,mergedData });
+      return res.status(200).json({ message: "success", mergedData });
     } catch (err) {
       console.log(err);
       return res.status(500).json({ message: "Internal Server Error" });
