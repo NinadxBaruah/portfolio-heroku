@@ -33,6 +33,9 @@ nav {
   align-items: center;
   margin-bottom: 2rem;
 }
+.nav-links{
+  display: flex;
+}
 
 .nav-links a {
   color: #64ffda;
@@ -44,7 +47,11 @@ nav {
 .nav-links a:hover {
   color: #fff;
 }
-
+@media screen and (max-width: 600px){
+  .nav-links{
+    display: none;
+  }
+}
 .hero-content {
   text-align: center;
   padding: 4rem 0;
@@ -223,7 +230,7 @@ nav {
   transition: transform 0.5s ease, z-index 0s;
   z-index: 1;
   /* Default lower z-index for non-hovered videos */
-}
+} 
 
 .project-card video:hover {
   transform: scale(1.5);
