@@ -31,6 +31,11 @@ router.get('/tic-tac-toe', handleProjectTicTacToe);
 router.get('/tic-tac-toe/offlineGameBoard', handleOfflineGameBoard);
 router.use('/tic-tac-toe/multiplayer', multiplayerRoute);
 
+
+router.get('/intern/1',(req , res) =>{
+  res.render('internProject')
+})
+
 // Screen Mirror Routes
 
 router.use('/video-chat',videoChat);
