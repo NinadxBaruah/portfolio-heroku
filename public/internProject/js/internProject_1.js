@@ -80,3 +80,16 @@ function handleSwipe() {
         }
     }
 }
+
+
+const bookNowButtonForScrool = document.querySelector(".book-now-button");
+const contactSection = document.getElementById("contact");
+
+
+bookNowButtonForScrool.addEventListener("click", () => {
+  // Smoothly scroll to the contact section
+  contactSection.scrollIntoView({
+    behavior: "smooth", 
+    block: "start", 
+  });
+});
