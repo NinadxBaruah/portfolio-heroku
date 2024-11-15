@@ -88,6 +88,9 @@ if (process.env.NODE_ENV === "production") {
 app.use(express.static(path.resolve(__dirname, "public")));
 
 // Routes
+app.get('/resume',(req,res) =>{
+  res.render('resume')
+})
 app.use("/projects", projects);
 app.use("/", homepage);
 
