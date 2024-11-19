@@ -25,6 +25,7 @@ const handleOfflineGameBoard = require("../../controllers/handleOfflineGameBoard
 const multiplayerRoute = require("../http.route/multiplayerRoute");
 const chatApp = require("./api");
 const videoChat = require("./videoChat")
+const assignment1 = require("./assignment1");
 
 // Tic-tac-toe routes
 router.get('/tic-tac-toe', handleProjectTicTacToe);
@@ -36,6 +37,11 @@ router.get('/intern/1',(req , res) =>{
   res.render('internProject')
 })
 
+router.get('/intern/2',(req , res) =>{
+  res.render('assignment1');
+})
+
+router.use("/intern/2'/api/v1" ,assignment1);
 // Screen Mirror Routes
 
 router.use('/video-chat',videoChat);

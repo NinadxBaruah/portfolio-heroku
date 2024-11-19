@@ -70,7 +70,8 @@ app.set("views", path.join(__dirname, "views"));
 if (process.env.NODE_ENV === "production") {
   app.use(
     "/projects/chat-app",
-    express.static(path.join(__dirname, "dist"), {
+    express.static(path.join(__dirname, "dist"),
+     {
       setHeaders: (res, filepath) => {
         if (filepath.endsWith(".js")) {
           res.set("Content-Type", "application/javascript");
