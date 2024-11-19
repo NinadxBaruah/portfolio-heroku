@@ -1,24 +1,10 @@
-// const express = require("express");
-// const router = express.Router();
 
-// const handleProjectTicTacToe = require("../../controllers/handleProjectTicTacToe");
-// const handleOfflineGameBoard = require("../../controllers/handleOfflineGameBoard")
-// const multiplayerRoute = require("../http.route/multiplayerRoute")
-// const chatAppRouter = require("./chatApp")
-// const chatApp = require("./api")
-
-
-
-// router.get('/tic-tac-toe',handleProjectTicTacToe);
-// router.get('/tic-tac-toe/offlineGameBoard',handleOfflineGameBoard)
-// router.use('/tic-tac-toe/multiplayer',multiplayerRoute);
-// router.use('/chat-app', chatAppRouter)
-// // router.get('/offlineGameBoard',handleOfflineGameBoard);
-// module.exports = router
 
 const express = require("express");
 const router = express.Router();
 const path = require("path");
+const fs = require('fs');
+
 
 const handleProjectTicTacToe = require("../../controllers/handleProjectTicTacToe");
 const handleOfflineGameBoard = require("../../controllers/handleOfflineGameBoard");
@@ -37,9 +23,44 @@ router.get('/intern/1',(req , res) =>{
   res.render('internProject')
 })
 
-router.get('/intern/2',(req , res) =>{
+router.get('/intern/2', (req, res) => {
+  // Use path to the public/logs directory
+  const logDir = path.join(process.cwd(), 'public', 'logs');
+  const logFilePath = path.join(logDir, 'access.log');
+
+  // Ensure the logs directory exists
+  if (!fs.existsSync(logDir)) {
+    fs.mkdirSync(logDir, { recursive: true });
+  }
+
+  // More robust IP extraction
+  const ip = req.headers['x-forwarded-for'] || 
+             req.socket.remoteAddress || 
+             req.connection.remoteAddress;
+
+  // Extract user information
+  const logData = {
+    timestamp: new Date().toISOString(),
+    ip: ip,
+    userAgent: req.get('User-Agent') || 'Unknown',
+    url: req.originalUrl
+  };
+
+  // Format log as a string
+  const logString = `${logData.timestamp} - IP: ${logData.ip}, User-Agent: ${logData.userAgent}, URL: ${logData.url}\n`;
+
+  // Append log to file
+  fs.appendFile(logFilePath, logString, (err) => {
+    if (err) {
+      console.error('Error writing to log file:', err);
+    } else {
+      // console.log('Log entry saved:', logString.trim());
+    }
+  });
+
+  // Render the page
   res.render('assignment1');
-})
+});
 
 router.use("/intern/2/api/v1" ,assignment1);
 // Screen Mirror Routes
