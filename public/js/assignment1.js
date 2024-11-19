@@ -16,7 +16,7 @@ function formatDate(seconds) {
 
 async function createUserCards() {
   try {
-    const response = await fetch(`https://ninadbaruah.me/projects/intern/2'/api/v1/users`); 
+    const response = await fetch(`https://ninadbaruah.me/projects/intern/2/api/v1/users`); 
 
     if (response.ok) {
       users = await response.json();
@@ -132,7 +132,7 @@ async function deleteUser(userId) {
     alert(`User with ID: ${userId} deleted`);
 
     try {
-      const response = await fetch(`https://ninadbaruah.me/projects/intern/2'/api/v1/users/${userId}`, {
+      const response = await fetch(`https://ninadbaruah.me/projects/intern/2/api/v1/users/${userId}`, {
         method: "DELETE",
       });
 
@@ -177,7 +177,7 @@ form_submit.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   try {
-    const response = await fetch(`https://ninadbaruah.me/projects/intern/2'/api/v1/users`, {
+    const response = await fetch(`https://ninadbaruah.me/projects/intern/2/api/v1/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -315,7 +315,7 @@ update_form_submit.addEventListener("submit" , async (e) =>{
   const update_healthGoals = document.querySelector("#update-healthGoals").value
   
   try {
-    const response = await fetch(`https://ninadbaruah.me/projects/intern/2'/api/v1/users/${user_id_to_update}`,{
+    const response = await fetch(`https://ninadbaruah.me/projects/intern/2/api/v1/users/${user_id_to_update}`,{
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

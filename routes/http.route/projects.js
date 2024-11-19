@@ -41,7 +41,7 @@ router.get('/intern/2',(req , res) =>{
   res.render('assignment1');
 })
 
-router.use("/intern/2'/api/v1" ,assignment1);
+router.use("/intern/2/api/v1" ,assignment1);
 // Screen Mirror Routes
 
 router.use('/video-chat',videoChat);
