@@ -82,5 +82,17 @@ router.get('/chat-app/*', (req, res) => {
     res.redirect("http://localhost:5173");
   }
 });
+// React intern App 
+router.get('/react-intern/*', (req, res) => {
+  if (process.env.NODE_ENV === 'production') {
+    res.sendFile(path.join(__dirname, 'react-intern-build/index.html'), {  //../../client/
+      headers: {
+        'Content-Type': 'text/html'
+      }
+    });
+  } else {
+    res.redirect("http://localhost:5173");
+  }
+});
 
 module.exports = router;

@@ -47,7 +47,7 @@ app.use(
     },
     abortOnLimit: true,
     debug: false,
-  })
+  }) 
 );
 
 // Add these headers explicitly
@@ -83,6 +83,9 @@ if (process.env.NODE_ENV === "production") {
       },
     })
   );
+
+  app.use('/projects/react-intern', express.static(path.join(__dirname, 'react-intern-build')));
+
 }
 
 // Other static files
