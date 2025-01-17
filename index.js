@@ -7,13 +7,13 @@ const cors = require("cors");
 const configureWebSocket = require("./socket/index");
 const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
-
+// const connectDB2 = require("./db/db2");
 const projects = require("./routes/http.route/projects");
 const homepage = require("./routes/http.route/homepage");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
-
+// connectDB2();
 // Trust the first proxy
 app.set("trust proxy", 1);
 
@@ -85,6 +85,7 @@ if (process.env.NODE_ENV === "production") {
   );
 
   app.use('/projects/react-intern', express.static(path.join(__dirname, 'react-intern-build')));
+  app.use('/projects/intern/3', express.static(path.join(__dirname, 'react-intern-build2')));
 
 }
 
