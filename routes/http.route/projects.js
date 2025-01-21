@@ -10,6 +10,7 @@ const chatApp = require("./api");
 const videoChat = require("./videoChat");
 const assignment1 = require("./assignment1");
 const assignment2 = require("./assignment2");
+const assignment3 = require("./assignment3");
 
 // Tic-tac-toe routes
 router.get("/tic-tac-toe", handleProjectTicTacToe);
@@ -65,10 +66,31 @@ router.use("/intern/2/api/v1", assignment1);
 
 router.use("/intern/3/api/v1", assignment2);
 
+router.use("/intern/4/api/v1", assignment3);
+
 router.get("/intern/3/*", (req, res) => {
   if (process.env.NODE_ENV === "production") {
     // Use path.resolve to get absolute path from project root
     const buildPath = path.resolve(__dirname, '../../react-intern-build2/index.html');
+    
+    res.sendFile(buildPath, {
+      headers: {
+        "Content-Type": "text/html",
+      },
+    }, (err) => {
+      if (err) {
+        console.error('Error sending file:', err);
+        res.status(500).send('Error loading page');
+      }
+    });
+  } else {
+    res.redirect("http://localhost:5173");
+  }
+});
+router.get("/intern/4/*", (req, res) => {
+  if (process.env.NODE_ENV === "production") {
+    // Use path.resolve to get absolute path from project root
+    const buildPath = path.resolve(__dirname, '../../react-intern-build3/index.html');
     
     res.sendFile(buildPath, {
       headers: {

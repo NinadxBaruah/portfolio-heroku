@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Email Template</title>
+    <style>
+        /* Reset styles for email clients */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        /* Base styles */
+        body {
+            font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+            line-height: 1.6;
+            background-color: #f8f8f8;
+        }
+
+        /* Table-based layout for better email client compatibility */
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+
+        img {
+            -ms-interpolation-mode: bicubic;
+            max-width: 100%;
+            border: 0;
+            display: block;
+            height: auto;
+        }
+
+        /* Container styles */
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Section styles */
+        .logo-section {
+            padding: 30px 20px;
+            text-align: center;
+            background-color: #ffffff;
+        }
+
+        .logo-image {
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+        .title-section {
+            padding: 20px 30px;
+            text-align: center;
+            background-color: #ffffff;
+        }
+
+        .title-section h1 {
+            margin: 0;
+            color: #333333;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .content-section {
+            padding: 30px;
+            background-color: #ffffff;
+            color: #555555;
+        }
+
+        .footer-section {
+            padding: 25px;
+            text-align: center;
+            background-color: #f5f5f5;
+            border-top: 1px solid #eeeeee;
+            color: #666666;
+            font-size: 14px;
+        }
+
+        /* Responsive styles */
+        @media screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+                margin: auto !important;
+            }
+            
+            .content-section,
+            .title-section {
+                padding: 20px !important;
+            }
+            
+            .title-section h1 {
+                font-size: 20px !important;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #2d2d2d !important;
+            }
+            
+            .email-container {
+                background-color: #333333 !important;
+            }
+            
+            .title-section h1 {
+                color: #ffffff !important;
+            }
+            
+            .content-section {
+                color: #eeeeee !important;
+                background-color: #333333 !important;
+            }
+            
+            .footer-section {
+                background-color: #2d2d2d !important;
+                border-top-color: #444444 !important;
+                color: #cccccc !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td align="center" valign="top">
+                <table role="presentation" class="email-container" width="600" cellpadding="0" cellspacing="0">
+                    <!-- Logo Section -->
+                    <tr>
+                        <td class="logo-section">
+                            <img src="{{imageUrl}}" alt="Company Logo" class="logo-image">
+                        </td>
+                    </tr>
+
+                    <!-- Title Section -->
+                    <tr>
+                        <td class="title-section">
+                            <h1>{{title}}</h1>
+                        </td>
+                    </tr>
+
+                    <!-- Content Section -->
+                    <tr>
+                        <td class="content-section">
+                            {{content}}
+                        </td>
+                    </tr>
+
+                    <!-- Footer Section -->
+                    <tr>
+                        <td class="footer-section">
+                            {{footer}}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

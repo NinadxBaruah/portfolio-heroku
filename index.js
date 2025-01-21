@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const bodyParser = require('body-parser')
 const fs = require("fs");
 require("dotenv").config();
 require("./db/db");
@@ -13,6 +14,7 @@ const homepage = require("./routes/http.route/homepage");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
+app.use(bodyParser.urlencoded({ extended: false }))
 // connectDB2();
 // Trust the first proxy
 app.set("trust proxy", 1);
@@ -37,18 +39,20 @@ app.use(
 // }
 
 // Configure express-fileupload with memory efficient options
-app.use(
-  fileUpload({
-    useTempFiles: true,
-    tempFileDir: path.join(__dirname, "uploads", "temp"),
-    limits: {
-      fileSize: 5 * 1024 * 1024, // 5MB limit
-      files: 1, // Allow only 1 file upload at a time
-    },
-    abortOnLimit: true,
-    debug: false,
-  }) 
-);
+// app.use(
+//   fileUpload({
+//     useTempFiles: true,
+//     tempFileDir: path.join(__dirname, "uploads", "temp"),
+//     limits: {
+//       fileSize: 5 * 1024 * 1024, // 5MB limit
+//       files: 1, // Allow only 1 file upload at a time
+//     },
+//     abortOnLimit: true,
+//     debug: false,
+//   }) 
+// );
+
+app.use('/uploads', express.static(path.join(process.cwd(), 'public', 'uploads')));
 
 // Add these headers explicitly
 app.use((req, res, next) => {
@@ -86,6 +90,7 @@ if (process.env.NODE_ENV === "production") {
 
   app.use('/projects/react-intern', express.static(path.join(__dirname, 'react-intern-build')));
   app.use('/projects/intern/3', express.static(path.join(__dirname, 'react-intern-build2')));
+  app.use('/projects/intern/4', express.static(path.join(__dirname, 'react-intern-build3')));
 
 }
 
