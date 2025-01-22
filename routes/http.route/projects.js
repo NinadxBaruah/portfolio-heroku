@@ -1,12 +1,37 @@
+<<<<<<< HEAD
 const express = require("express");
 const router = express.Router();
 const path = require("path");
 const fs = require("fs");
+=======
+// const express = require("express");
+// const router = express.Router();
+
+// const handleProjectTicTacToe = require("../../controllers/handleProjectTicTacToe");
+// const handleOfflineGameBoard = require("../../controllers/handleOfflineGameBoard")
+// const multiplayerRoute = require("../http.route/multiplayerRoute")
+// const chatAppRouter = require("./chatApp")
+// const chatApp = require("./api")
+
+
+
+// router.get('/tic-tac-toe',handleProjectTicTacToe);
+// router.get('/tic-tac-toe/offlineGameBoard',handleOfflineGameBoard)
+// router.use('/tic-tac-toe/multiplayer',multiplayerRoute);
+// router.use('/chat-app', chatAppRouter)
+// // router.get('/offlineGameBoard',handleOfflineGameBoard);
+// module.exports = router
+
+const express = require("express");
+const router = express.Router();
+const path = require("path");
+>>>>>>> d7ed9e52fc5ee44a4aefece0e255f321b89cf92d
 
 const handleProjectTicTacToe = require("../../controllers/handleProjectTicTacToe");
 const handleOfflineGameBoard = require("../../controllers/handleOfflineGameBoard");
 const multiplayerRoute = require("../http.route/multiplayerRoute");
 const chatApp = require("./api");
+<<<<<<< HEAD
 const videoChat = require("./videoChat");
 const assignment1 = require("./assignment1");
 const assignment2 = require("./assignment2");
@@ -133,10 +158,37 @@ router.get("/react-intern/*", (req, res) => {
       headers: {
         "Content-Type": "text/html",
       },
+=======
+const videoChat = require("./videoChat")
+
+// Tic-tac-toe routes
+router.get('/tic-tac-toe', handleProjectTicTacToe);
+router.get('/tic-tac-toe/offlineGameBoard', handleOfflineGameBoard);
+router.use('/tic-tac-toe/multiplayer', multiplayerRoute);
+
+// Screen Mirror Routes
+
+router.use('/video-chat',videoChat);
+
+// Chat app API routes
+router.use('/chat-app/api', chatApp);
+
+// Chat app client routes - This should be the last route for chat-app
+router.get('/chat-app/*', (req, res) => {
+  if (process.env.NODE_ENV === 'production') {
+    res.sendFile(path.join(__dirname, 'dist/index.html'), {  //../../client/
+      headers: {
+        'Content-Type': 'text/html'
+      }
+>>>>>>> d7ed9e52fc5ee44a4aefece0e255f321b89cf92d
     });
   } else {
     res.redirect("http://localhost:5173");
   }
 });
 
+<<<<<<< HEAD
 module.exports = router;
+=======
+module.exports = router;
+>>>>>>> d7ed9e52fc5ee44a4aefece0e255f321b89cf92d

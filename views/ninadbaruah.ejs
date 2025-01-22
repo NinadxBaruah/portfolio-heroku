@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -135,3 +136,155 @@
     <script src="/js/ninadbaruah.js"></script>
   </body>
 </html>
+=======
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninad Baruah - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/ninadbaruah.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <h2>Ninad Baruah</h2>
+            <div class="nav-links">
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Hi, I'm Ninad Baruah</h1>
+                <p>MCA Student at Manipal University Jaipur | Full Stack Developer</p>
+                <a href="#contact" class="btn">Get in Touch</a>
+            </div>
+        </section>
+
+        <section id="projects" class="projects">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <h3>Tic Tac Toe Multiplayer</h3>
+                    <p>A real-time multiplayer game where friends can challenge each other online.</p>
+                    <p><strong>Tech:</strong> React, Node.js, WebSocket</p>
+                    <a href="/projects/tic-tac-toe" class="btn">View Project</a>
+                </div>
+                <div class="project-card">
+                    <h3>Chat & Video Call App</h3>
+                    <p>Real-time communication platform with chat and upcoming video calling features.</p>
+                    <p><strong>Tech:</strong> WebRTC, Socket.io, React</p>
+                    <a href="/projects/chat-app" class="btn">View Project</a>
+                </div>
+                <div class="project-card">
+                    <h3>Packet Loss Test App</h3>
+                    <p>Web application for testing network packet loss (Coming Soon)</p>
+                    <p><strong>Tech:</strong> Node.js, WebSocket</p>
+                </div>
+                <div class="project-card">
+                    <h3>Video Call App</h3>
+                    <p>Real-time communication platform with video calling features.</p>
+                    <p><strong>Tech:</strong> WebRTC, WebSocket, React</p>
+                    <a href="/projects/video-chat" class="btn">View Project</a>
+                </div>
+                
+            </div>
+        </section>
+
+        <section id="skills" class="skills">
+          <h2 class="section-title">Skills & Technologies</h2>
+          <div class="skills-grid">
+              <!-- Frontend Development -->
+              <div class="skill-item">React.js</div>
+              <div class="skill-item">JavaScript</div>
+              <div class="skill-item">TypeScript</div>
+              <div class="skill-item">HTML5</div>
+              <div class="skill-item">CSS3</div>
+              <div class="skill-item">Redux</div>
+              <div class="skill-item">Tailwind CSS</div>
+              <div class="skill-item">Bootstrap</div>
+              <div class="skill-item">GSAP</div>
+
+              <!-- Backend Development -->
+              <div class="skill-item">Node.js</div>
+              <div class="skill-item">Express.js</div>
+              <div class="skill-item">MongoDB</div>
+              <div class="skill-item">MySQL</div>
+              <div class="skill-item">RESTful APIs</div>
+
+              <!-- Programming Languages -->
+              <div class="skill-item">Java</div>
+              <div class="skill-item">Python(basic)</div>
+
+              <!-- Real-time Technologies -->
+              <div class="skill-item">WebSocket</div>
+              <div class="skill-item">WebRTC</div>
+
+              <!-- Developer Tools -->
+              <div class="skill-item">Git</div>
+              <div class="skill-item">GitHub</div>
+              <div class="skill-item">VS Code</div>
+              <div class="skill-item">Postman</div>
+
+              <!-- Cloud & Deployment -->
+              <div class="skill-item">Heroku</div>
+              <div class="skill-item">Netlify</div>
+              <div class="skill-item">Vercel</div>
+
+              <!-- Additional Skills -->
+              <div class="skill-item">Data Structures</div>
+              <div class="skill-item">Algorithms</div>
+              <div class="skill-item">Problem Solving</div>
+          </div>
+      </section>
+
+        <section id="contact" class="contact">
+            <h2 class="section-title">Get in Touch</h2>
+            <p>Email: <a href="mailto:ninadbaruah@gmail.com">ninadbaruah@gmail.com</a></p>
+            <p>Phone: +91-8638752077</p>
+            <div class="social-links">
+                <a href="https://github.com/NinadxBaruah" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/ninad-baruah/" target="_blank">LinkedIn</a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        gsap.from(".hero-content", {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            ease: "power3.out"
+        });
+
+        gsap.from(".project-card", {
+            duration: 0.8,
+            y: 30,
+            opacity: 0,
+            stagger: 0.2,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: ".projects",
+                start: "top center"
+            }
+        });
+
+        gsap.from(".skill-item", {
+            duration: 0.5,
+            scale: 0.8,
+            opacity: 0,
+            stagger: 0.1,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+                trigger: ".skills",
+                start: "top center"
+            }
+        });
+    </script>
+</body>
+</html>
+>>>>>>> d7ed9e52fc5ee44a4aefece0e255f321b89cf92d
