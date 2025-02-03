@@ -1,7 +1,7 @@
   // DOM menipulation
-  const showSkill = document.querySelector(".show-skill") 
-  const skillsContainer = document.querySelector(".skills-flex") 
-  const hideSkill = document.getElementById("hide-skill")
+//   const showSkill = document.querySelector(".show-skill") 
+//   const skillsContainer = document.querySelector(".skills-flex") 
+//   const hideSkill = document.getElementById("hide-skill")
 
 
   // Three.js setup
@@ -152,22 +152,104 @@
       }
   });
 
-  // Show skill toggle
+//   // Show skill toggle
 
-  showSkill.addEventListener("click", () => {
-    skillsContainer.classList.remove("hide"); 
-    skillsContainer.classList.add("show");   
-    skillsContainer.style.display = "flex";   
-    showSkill.style.display = "none";         
-    hideSkill.style.display = "flex";        
+//   showSkill.addEventListener("click", () => {
+//     skillsContainer.classList.remove("hide"); 
+//     skillsContainer.classList.add("show");   
+//     skillsContainer.style.display = "flex";   
+//     showSkill.style.display = "none";         
+//     hideSkill.style.display = "flex";        
+// });
+
+// hideSkill.addEventListener("click", () => {
+//     skillsContainer.classList.remove("show"); 
+//     skillsContainer.classList.add("hide");    
+//     setTimeout(() => {
+//         skillsContainer.style.display = "none"; 
+//     }, 500); 
+//     hideSkill.style.display = "none";        
+//     showSkill.style.display = "flex";        
+// });
+
+// DOM elements
+const showSkill = document.querySelector(".show-skill");
+const hideSkill = document.getElementById("hide-skill");
+const skillsContainer = document.querySelector(".skills-flex");
+
+// Create two scroll tracks for infinite loop
+function createScrollTracks() {
+  const scrollContainer = document.createElement('div');
+  scrollContainer.className = 'scroll-container';
+
+  // Create original track
+  const track1 = document.createElement('div');
+  track1.className = 'scroll-content';
+  
+  // Create duplicate track
+  const track2 = document.createElement('div');
+  track2.className = 'scroll-content';
+
+  // Get all existing skill items
+  const skillItems = Array.from(skillsContainer.querySelectorAll('.skill-item'));
+
+  // Clone skills into both tracks
+  skillItems.forEach(item => {
+    track1.appendChild(item.cloneNode(true));
+    track2.appendChild(item.cloneNode(true));
+  });
+
+  // Clear original content and append new tracks
+  scrollContainer.appendChild(track1);
+  scrollContainer.appendChild(track2);
+  
+  skillsContainer.innerHTML = '';
+  skillsContainer.appendChild(scrollContainer);
+}
+
+// Initialize scroll animation
+function initScrollAnimation() {
+  createScrollTracks();
+  
+  const scrollContainer = skillsContainer.querySelector('.scroll-container');
+  const scrollWidth = scrollContainer.querySelector('.scroll-content').offsetWidth;
+  
+  // Set up the animation
+  scrollContainer.style.animation = 'none'; // Reset animation
+  scrollContainer.offsetHeight; // Trigger reflow
+  scrollContainer.style.animation = `scroll ${scrollWidth * 0.02}s linear infinite`; // Adjust speed based on content width
+}
+
+// Event listeners
+showSkill.addEventListener("click", () => {
+  skillsContainer.classList.remove("hide");
+  skillsContainer.classList.add("show");
+  skillsContainer.style.display = "block";
+  showSkill.style.display = "none";
+  hideSkill.style.display = "flex";
+  
+  // Initialize scroll after a short delay to ensure content is visible
+  setTimeout(initScrollAnimation, 100);
 });
 
 hideSkill.addEventListener("click", () => {
-    skillsContainer.classList.remove("show"); 
-    skillsContainer.classList.add("hide");    
-    setTimeout(() => {
-        skillsContainer.style.display = "none"; 
-    }, 500); 
-    hideSkill.style.display = "none";        
-    showSkill.style.display = "flex";        
+  skillsContainer.classList.remove("show");
+  skillsContainer.classList.add("hide");
+  setTimeout(() => {
+    skillsContainer.style.display = "none";
+  }, 500);
+  hideSkill.style.display = "none";
+  showSkill.style.display = "flex";
 });
+
+// Optional: Pause animation on hover
+const scrollContainer = document.querySelector('.scroll-container');
+if (scrollContainer) {
+  scrollContainer.addEventListener('mouseenter', () => {
+    scrollContainer.style.animationPlayState = 'paused';
+  });
+  
+  scrollContainer.addEventListener('mouseleave', () => {
+    scrollContainer.style.animationPlayState = 'running';
+  });
+}
