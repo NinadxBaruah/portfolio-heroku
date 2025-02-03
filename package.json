@@ -11,7 +11,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-<<<<<<< HEAD
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.3",
@@ -32,20 +31,7 @@
     "nodemailer": "^6.9.16",
     "querystring": "^0.2.1",
     "uuid": "^11.0.3",
-=======
-    "cloudinary": "^2.5.1",
-    "cookie-parser": "^1.4.7",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "ejs": "^3.1.10",
-    "express": "^4.21.1",
-    "express-fileupload": "^1.5.1",
-    "express-ws": "^5.0.2",
-    "jsonwebtoken": "^9.0.2",
-    "mime-types": "^2.1.35",
-    "mongoose": "^8.7.1",
-    "querystring": "^0.2.1",
->>>>>>> d7ed9e52fc5ee44a4aefece0e255f321b89cf92d
+
     "ws": "^8.18.0"
   },
   "devDependencies": {
