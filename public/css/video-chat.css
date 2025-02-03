@@ -632,3 +632,66 @@ body {
   0% { transform: translateY(-50px); opacity: 0; }
   100% { transform: translateY(0); opacity: 1; }
 }
+
+.nat-notification {
+  background: linear-gradient(145deg, #dc2626 0%, #991b1b 100%);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  margin: 1rem auto 2rem;
+  max-width: 800px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 4px 30px rgba(220, 38, 38, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nat-notification svg {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.hero-title {
+  text-align: center;
+  font-size: 2.5rem;
+  background: linear-gradient(45deg, #ffffff 0%, #c7d2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.05em;
+}
+
+.video-grid {
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.video-player {
+  border-radius: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-player:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.pill-container {
+  background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.control-button {
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.control-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
