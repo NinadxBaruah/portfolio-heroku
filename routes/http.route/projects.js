@@ -17,6 +17,9 @@ const assignment3 = require("./assignment3");
 router.get("/tic-tac-toe", handleProjectTicTacToe);
 router.get("/tic-tac-toe/offlineGameBoard", handleOfflineGameBoard);
 router.use("/tic-tac-toe/multiplayer", multiplayerRoute);
+router.get('/chatwithpdf', (req, res) => {
+  res.redirect('https://chatpdf-one-mauve.vercel.app/');
+});
 
 router.get("/intern/1", (req, res) => {
   res.render("internProject");
