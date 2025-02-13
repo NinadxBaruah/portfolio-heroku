@@ -14,7 +14,7 @@ const fileUpload = require("express-fileupload");
 const projects = require("./routes/http.route/projects");
 const homepage = require("./routes/http.route/homepage");
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }))
 // connectDB2();
@@ -96,6 +96,7 @@ if (process.env.NODE_ENV === "production") {
   app.use('/projects/react-intern', express.static(path.join(__dirname, 'react-intern-build')));
   app.use('/projects/intern/3', express.static(path.join(__dirname, 'react-intern-build2')));
   app.use('/projects/intern/4', express.static(path.join(__dirname, 'react-intern-build3')));
+  app.use('/projects/intern/5', express.static(path.join(__dirname, 'react-intern-build5')));
   // app.use('/projects/intern/5', express.static(path.join(__dirname, 'react-intern-build4')));
 
 

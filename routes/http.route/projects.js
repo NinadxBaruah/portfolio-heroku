@@ -110,6 +110,25 @@ router.get("/intern/4/*", (req, res) => {
     res.redirect("http://localhost:5173");
   }
 });
+router.get("/intern/5/*", (req, res) => {
+  if (process.env.NODE_ENV === "production") {
+    // Use path.resolve to get absolute path from project root
+    const buildPath = path.resolve(__dirname, '../../react-intern-build5/index.html');
+    
+    res.sendFile(buildPath, {
+      headers: {
+        "Content-Type": "text/html",
+      },
+    }, (err) => {
+      if (err) {
+        console.error('Error sending file:', err);
+        res.status(500).send('Error loading page');
+      }
+    });
+  } else {
+    res.redirect("http://localhost:5173");
+  }
+});
 
 // router.get("/intern/5/*", (req, res) => {
 //   if (process.env.NODE_ENV === "production") {
