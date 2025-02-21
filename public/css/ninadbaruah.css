@@ -112,7 +112,244 @@ nav h2 {
   opacity: 0;
 }
 
+/* Experience Section */
+/* Experience Section Base */
+.experience {
+  padding: 8rem 0;
+  background: linear-gradient(180deg, var(--background) 0%, rgba(10, 25, 47, 0.8) 100%);
+  position: relative;
+}
 
+.experience::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  opacity: 0.3;
+}
+
+/* Timeline Container */
+.experience-timeline {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+}
+
+/* Experience Card */
+.experience-card {
+  background: rgba(10, 25, 47, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(100, 255, 218, 0.1);
+  border-radius: 16px;
+  padding: 2.5rem;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+}
+
+.experience-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary);
+  box-shadow: 
+    0 10px 30px -15px rgba(100, 255, 218, 0.1),
+    0 0 0 1px rgba(100, 255, 218, 0.1);
+}
+
+/* Card Header */
+.experience-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.company-logo-wrapper {
+  flex-shrink: 0;
+}
+
+.company-logo {
+  width: 70px;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.experience-card:hover .company-logo {
+  transform: scale(1.05);
+}
+
+.company-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0.9);
+}
+
+/* Experience Meta */
+.experience-meta {
+  flex-grow: 1;
+}
+
+.role-info {
+  margin-bottom: 0.5rem;
+}
+
+.role-title {
+  color: var(--text);
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.experience-card:hover .role-title {
+  color: var(--primary);
+}
+
+.company-name {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.experience-date {
+  display: inline-block;
+  color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.3rem 1rem;
+  background: rgba(100, 255, 218, 0.1);
+  border-radius: 20px;
+  margin-top: 0.5rem;
+}
+
+/* Experience Content */
+.experience-content {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.responsibility-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+}
+
+.responsibility-list li {
+  position: relative;
+  padding-left: 1.8rem;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.responsibility-list li:hover {
+  opacity: 1;
+}
+
+.responsibility-list li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-size: 1.2rem;
+}
+
+/* Animations */
+.experience-card {
+  animation: fadeIn 0.5s ease forwards;
+  opacity: 0;
+}
+
+.experience-card:nth-child(1) { animation-delay: 0.2s; }
+.experience-card:nth-child(2) { animation-delay: 0.4s; }
+.experience-card:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .experience-timeline {
+    padding: 1.5rem;
+    gap: 3rem;
+  }
+  
+  .experience-card {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .experience {
+    padding: 6rem 0;
+  }
+  
+  .experience-header {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .company-logo {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .role-title {
+    font-size: 1.2rem;
+  }
+  
+  .company-name {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .experience-timeline {
+    padding: 1rem;
+    gap: 2rem;
+  }
+  
+  .experience-card {
+    padding: 1.5rem;
+  }
+  
+  .experience-content {
+    font-size: 0.95rem;
+  }
+  
+  .responsibility-list li {
+    padding-left: 1.5rem;
+  }
+}
+
+/* Dark Mode Enhancement */
+@media (prefers-color-scheme: dark) {
+  .experience-card {
+    background: rgba(10, 25, 47, 0.7);
+  }
+}
 /* Projects Section */
 .projects {
   padding: 6rem 0;
@@ -141,6 +378,7 @@ nav h2 {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   flex: 1 1 300px; /* Ensures cards are flexible with a minimum width of 300px */
+  max-width: 400px;
 }
 
 .project-card:hover {
@@ -170,33 +408,17 @@ nav h2 {
   margin-bottom: 1rem;
 }
 
-/* Mobile Responsiveness */
-@media screen and (max-width: 768px) {
-  .projects {
-    padding: 3rem 0;
-  }
-
-  .section-title {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .project-grid {
-    gap: 1rem;
-    padding: 0.5rem;
-  }
-
-  .project-card {
-    padding: 1rem;
-    flex: 1 1 100%; /* Each card takes full width on smaller screens */
-  }
+/* Skills Section - Improved Responsiveness */
+.skills {
+  padding: 6rem 0;
+  overflow: hidden;
 }
 
-
-/* Skills Section */
-.skills {
-  /* padding: 6rem 0; */
-  overflow: hidden;
+.skills-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
 }
 
 .show-skill {
@@ -231,6 +453,8 @@ nav h2 {
   transition: opacity 0.5s ease;
   position: relative;
   padding: 2rem 0;
+  width: 100%;
+  overflow: hidden;
 }
 
 .skills-flex.show {
@@ -243,7 +467,7 @@ nav h2 {
   content: '';
   position: absolute;
   top: 0;
-  width: 200px;
+  width: 100px;
   height: 100%;
   z-index: 2;
 }
@@ -261,8 +485,15 @@ nav h2 {
 .skills-flex .scroll-container {
   display: flex;
   animation: scroll 50s linear infinite;
-  gap: 2rem;
+  gap: 1.5rem;
   width: fit-content;
+}
+
+@media (max-width: 768px) {
+  .skills-flex .scroll-container {
+    animation: scroll 30s linear infinite;
+    gap: 1rem;
+  }
 }
 
 .skills-flex .scroll-container:hover {
@@ -271,18 +502,33 @@ nav h2 {
 
 .skills-flex .scroll-content {
   display: flex;
-  gap: 2rem;
-  padding: 0 2rem;
+  gap: 1.5rem;
+  padding: 0 1rem;
+  flex-wrap: nowrap;
+}
+
+@media (max-width: 768px) {
+  .skills-flex .scroll-content {
+    gap: 1rem;
+    padding: 0 0.5rem;
+  }
 }
 
 .skill-item {
   background: var(--glass);
   border: 1px solid var(--card-border);
   border-radius: 8px;
-  padding: 1rem 2rem;
+  padding: 0.75rem 1.5rem;
   white-space: nowrap;
   transition: all 0.3s ease;
-  min-width: max-content;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .skill-item {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
 }
 
 .skill-item:hover {
@@ -369,7 +615,17 @@ nav h2 {
   }
 }
 
-/* Media Queries */
+/* Media Queries - Improved Responsiveness */
+@media (max-width: 1024px) {
+  .experience-card {
+    padding: 1.5rem;
+  }
+  
+  .project-grid {
+    gap: 1.5rem;
+  }
+}
+
 @media (max-width: 768px) {
   nav {
     padding: 1rem;
@@ -382,9 +638,35 @@ nav h2 {
   .hero {
     padding-top: 4rem;
   }
+  
+  .section-title {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+  }
+  
+  .experience {
+    padding: 6rem 0 4rem;
+  }
+  
+  .experience-timeline {
+    gap: 2rem;
+  }
+  
+  .experience-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .company-logo {
+    width: 50px;
+    height: 50px;
+  }
 
   .project-card {
-    margin: 0 1rem;
+    margin: 0 0.5rem;
+    flex: 1 1 100%;
+    max-width: none;
   }
 
   .contact {
@@ -396,6 +678,25 @@ nav h2 {
   .btn {
     width: 80%;
     text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .experience-card {
+    padding: 1.25rem;
+  }
+  
+  .experience-meta h3 {
+    font-size: 1.1rem;
+  }
+  
+  .skill-item {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
   }
 }
 
